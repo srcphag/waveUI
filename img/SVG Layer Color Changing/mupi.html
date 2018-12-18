@@ -1,0 +1,68 @@
+ <!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link href="style.css" rel="stylesheet" type="text/css">
+	<script src="jquery-3.2.1.min.js"></script>
+</head>
+ <body>
+<img src="digital_signage.svg" class="svg icon" />
+<img src="dashboard.svg" class="svg icon" />
+<img src="catalog.svg" class="svg icon" />
+<img src="yokup.svg" class="svg icon" />
+<img src="iot.svg" class="svg icon" />
+<img src="video_analytics.svg" class="svg icon" />
+<img src="radio_analytics.svg" class="svg icon" />
+<img src="adsound.svg" class="svg icon" />
+<img src="augmented_reality.svg" class="svg icon" />
+<img src="push_notifications.svg" class="svg icon" />
+<img src="light_id.svg" class="svg icon" />
+<img src="marketing_sensorial.svg" class="svg icon" />
+<img src="music.svg" class="svg icon" />
+<img src="radio_analytics.svg" class="svg icon" />
+<img src="rtb.svg" class="svg icon" />
+<img src="social_wifi.svg" class="svg icon" />
+<img src="soporte.svg" class="svg icon" />
+<img src="turnos.svg" class="svg icon" />
+<img src="virtual_reality.svg" class="svg icon" />
+ <script>
+	// $('.svg-inject').svgInject();
+	/*
+ * Replace all SVG images with inline SVG
+ */
+jQuery('img.svg').each(function(){
+    var $img = jQuery(this);
+    var imgID = $img.attr('id');
+    var imgClass = $img.attr('class');
+    var imgURL = $img.attr('src');
+
+    jQuery.get(imgURL, function(data) {
+        // Get the SVG tag, ignore the rest
+        var $svg = jQuery(data).find('svg');
+
+        // Add replaced image's ID to the new SVG
+        if(typeof imgID !== 'undefined') {
+            $svg = $svg.attr('id', imgID);
+        }
+        // Add replaced image's classes to the new SVG
+        if(typeof imgClass !== 'undefined') {
+            $svg = $svg.attr('class', imgClass+' replaced-svg');
+        }
+
+        // Remove any invalid XML tags as per http://validator.w3.org
+        $svg = $svg.removeAttr('xmlns:a');
+
+        // Check if the viewport is set, if the viewport is not set the SVG wont't scale.
+        if(!$svg.attr('viewBox') && $svg.attr('height') && $svg.attr('width')) {
+            $svg.attr('viewBox', '0 0 ' + $svg.attr('height') + ' ' + $svg.attr('width'))
+        }
+
+        // Replace image with new SVG
+        $img.replaceWith($svg);
+
+    }, 'xml');
+
+});
+ </script>
+  </body>
+ </html>

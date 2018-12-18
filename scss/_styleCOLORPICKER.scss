@@ -1,0 +1,60 @@
+#colorPick * {
+	-webkit-transition: all linear .2s;
+	-moz-transition: all linear .2s;
+	-ms-transition: all linear .2s;
+	-o-transition: all linear .2s;
+	transition: all linear .2s;
+}
+
+#colorPick {
+	background: $white;
+	-webkit-backdrop-filter: blur(15px);
+	position: absolute;
+	border-radius: $radius;
+	box-shadow: $shadow;
+	padding: 15px;
+	width: 210px;
+	z-index: 30;
+	top: 20px;
+}
+
+#colorPick span {
+	margin-bottom: 10px;
+	display: block;
+	clear: both;
+	@extend %sectionheader;
+
+}
+
+.customColorHash {
+	border-radius: 5px;
+	height: 23px;
+	width: 122px;
+	margin: 1px 4px ;
+	padding: 0 4px;
+	border: 1px solid #babbba;	
+	outline: none;
+}
+.customColorHash.error {
+	border-color: #ff424c;
+	color: #ff424c;
+}
+
+.colorPickButton {
+	border-radius: 5px;
+	width: 30px;
+	height: 30px;
+	margin: 0px 3px;
+	cursor: pointer;
+	display: inline-block;
+	border: thin solid #eee;
+}
+
+.colorPickButton:hover {
+	transform: scale(1.1);
+}
+
+.colorPickDummy {
+	background: #fff;
+	border: 1px dashed #bbb;
+}

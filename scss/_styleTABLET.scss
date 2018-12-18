@@ -1,0 +1,465 @@
+@media screen and (max-width: 1024px) and (orientation: portrait) { 
+%tabletpadding{
+    padding: 0 $Hcell / 3;
+}
+.modal{
+    max-width: unset;
+    padding: $Vcell;
+    .body{
+        width: 80vw;
+        .rowL{
+            width: 30vw;
+            .thumbnail{
+                width: $Hcell*3.5;
+                height: $Hcell*3.5;
+            }
+        }
+        .rowR{
+            width: 50vw;
+        }   
+    }
+
+}
+.ui-autocomplete{
+    box-shadow: $shadow;
+    z-index: 900;
+    margin-top:$Vcell/2;
+    width: $Hcell * 10.5 !important;
+    background-color: $white;
+    height: $Hcell*25;
+    border-radius: $radius;
+    opacity: 0.98;
+    left: $Vcell*7.8 !important;
+    border: $line;
+    display: none;
+}
+.ui-draggable-dragging {
+    width: $Hcell*5;
+    height: $Vcell*2.2;
+    @extend %tabletpadding;
+}
+nav{
+    position: fixed;
+    width: 100vw;
+    height: $Vcell*2;
+    bottom: 0;
+    transition: $main-transition;
+    z-index: 700;
+    .wrapper{
+        height: 100%;
+        ul{
+            flex-direction: row;
+            display: flex;
+            li{
+                padding: 0 $Hcell / 2 !important;
+                width: $Hcell*16 / 3;
+                height: $Vcell*2;
+            }
+        }
+        .navigator{
+            display: none;
+        }
+    }
+  }
+  #work{
+      width: 100vw;
+      #source_area{
+          height: 100vh;
+          width: $Hcell*5;
+          .tabs{
+              width: 100%;
+              button{
+                @extend %tabletpadding;
+              }
+          }
+          .filter{
+              ul{
+                @extend %tabletpadding;
+              }
+          }
+          .accordion{
+              ul{
+                @extend %tabletpadding;
+                .dragelement{
+                    &:after{
+                        transform: scale(1);
+                    }
+                }
+                li{
+                    width: $Hcell*5;
+                }
+              }
+          }
+          tags > div > input{
+              left: unset;
+          }
+          hl{
+            width: $Hcell*3;
+          }
+          #filter{
+              height: $Vcell*1.5;
+              ul{
+                @extend %tabletpadding;
+              }
+          }
+          #tracks{
+              ul{
+                  li{
+                    width: $Hcell*5;
+                  }
+              }
+          }
+          .source{
+            height: 100vh - $Vcell*8;
+        }
+      }
+  }
+  main{
+    height: 100vh - $Vcell*4;
+    &.minMain{
+        width: $Hcell*11;
+    }
+    &.maxMain{
+        width: $Hcell*11;
+    }
+    .main_head{
+        width: $Hcell*11;
+        &.clean{
+            width: 100%;
+        }
+        .wrapper{
+            justify-content: space-between;
+            width: 100%;
+            >div{
+                border-bottom: unset !important;
+            }
+            .title{
+                width: $Hcell * 10 - $Hcell/3;
+                flex-direction: column;
+                width: $Hcell*10;
+                h1{
+                    font-size: 1.3em;
+                    height: $Vcell;
+                }
+                h2{
+                    height: $Vcell;
+                }
+            }
+            .buttons{
+                button{
+                    margin: unset;
+                    .wrapper{
+                        width: $Hcell;
+                    }
+                    & + button{
+                        margin-left: 12px; 
+                    }
+                    &.edit{
+                        display: flex;
+                    }
+                }
+            }
+        }
+        ul.week{
+            top: 9.5vh;
+            li{
+                font-size: 0.9em;
+            }
+                li:nth-of-type(1):before{
+                    content: "Mon";
+                }
+                li:nth-of-type(2):before{
+                    content: "Tue";
+                }
+                li:nth-of-type(3):before{
+                    content: "Wed";
+                }
+                li:nth-of-type(4):before{
+                    content: "Thu";
+                }
+                li:nth-of-type(5):before{
+                    content: "Fri";
+                }
+                li:nth-of-type(6):before{
+                    content: "Sat";
+                }
+                li:nth-of-type(7):before{
+                    content: "Sun";
+                }
+        }
+    }
+    
+    .player_body,
+    .album_body{
+        flex-direction: column;
+        .content{
+            width: 100%;
+            .thumbnail{
+                width: $Hcell*4;
+                div{
+                    width: $Hcell*4;
+                    height: $Hcell*4;
+                }
+                ul{
+                    width: 100%;
+                }
+            }
+            .info{
+                width: $Hcell*6;
+                ul{
+                    width: 100%;
+                }
+            }
+        }
+        .wrapper{
+            height: unset;
+            width: 100%;
+        }
+    }
+    .main-log, 
+    .main-uploader{
+        position: relative;
+        width: 100%;
+        bottom: 0;
+        top: 50px;
+        border-left: unset;
+        h3{
+            border-top: $line;
+        }
+        div.wrapper{
+            overflow: visible;
+            ul{
+                li{
+                    @extend %tabletpadding;
+                }
+            }
+        }
+    }
+    .main-uploader{
+        height: unset !important;
+    }
+    ul#album,
+    ul#schedule,
+    ul#player{
+        &.list{
+            padding-top: $Vcell/2;
+            padding-bottom: $Vcell/2;
+            a{
+                li{
+                    .name{
+                        width: $Hcell*6;
+                        div:nth-of-type(2){
+                            width: 30vw !important;
+                            h3{
+                                width: 100%;
+                                text-overflow: ellipsis;
+                                overflow: hidden;
+                                white-space: nowrap; 
+                                span{
+                                    display: none;
+                                }                  
+                            }
+                            div{
+                                display: none;
+                            }
+                        }
+                    }
+                    .infoRow{
+                        display: flex;
+                        flex-direction: row;
+                        width: $Hcell*5; 
+                        li{
+                            width:100%;
+                            background-color: unset;
+                            min-width: $Hcell/2;
+                            padding: unset;
+                            
+                        }
+                    }
+                }
+            }
+        }
+        &.grid{
+            padding-top: $Vcell;
+            padding-bottom: $Vcell;
+            a{
+                li{
+                    width: $Hcell*1.5*2;
+                    height: $Hcell*2*2;
+                    div.img{
+                        min-height: $Hcell * 1.5*2;
+                        min-width: $Hcell * 1.5*2;
+                        border-radius: $radius;
+                    } 
+                }
+            }
+        }
+    }
+    #filter{
+        height: $Vcell*1.5;
+        top: $Vcell*2;
+        .info{
+            .index{
+                &.active{
+                    display: none !important;
+                }
+            }
+        }
+    }
+    #calendar{
+    }
+}
+#float{
+    bottom: $Vcell*3;
+}
+#info_area{
+    &.showInfo{
+        width: $Hcell*11;
+    }
+    div.container{
+        .tab{
+            div.title{
+                h3{
+                    @extend %tabletpadding;
+                }
+            }
+        }
+}    
+}
+#audio{
+    z-index: 900;
+    left: 0;
+    width: 100vw;
+    bottom: -$Vcell*2;
+    position: fixed;
+    &.visible{
+        bottom: $Vcell*2;
+    }
+}
+    .fc-time-grid-container {
+        height: 3.18vh !important;
+        .fc-title {
+            font-weight: 400;
+            font-size: 1em;
+        }
+        .fc-event{
+            padding-top: 4px;
+        }
+    }
+    .fc-agendaWeek-view tr {
+        height: 3.18vh !important;
+        justify-content: center !important;
+    }
+} 
+
+@media only screen and (min-width: 425px) and (max-width: 1024px) and (orientation: landscape) {
+    nav{
+        position: fixed;
+        width: 100vw;
+        height: $Vcell*2;
+        bottom: 0;
+        transition: $main-transition;
+        z-index: 700;
+        .wrapper{
+            height: 100%;
+            ul{
+                flex-direction: row;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                li{
+                    padding: 0 $Hcell / 2 !important;
+                    width: $Vcell*5;
+                    height: $Vcell*2;
+                    font-size: 0.9em;
+                }
+            }
+            .navigator{
+                display: none;
+            }
+        }
+      }
+main{
+    height: 100vh - $Vcell*4;
+    width: 100vw - $Hcell*3;
+    h1{
+        font-size: 1.3em;  
+    }
+    h3{
+        font-size: 0.8em !important;
+    }
+ 
+    #filter{
+        ul{
+            &.info{
+                li{
+                    &.index{
+                        font-size: 0.7em;
+                         min-width: (100vw - $Hcell*3 - $Hcell*1.5 - 25vw) / 4;
+                    }
+                    &:after{
+                        font-size: 12px;
+                    }
+                }
+            }
+            &.show{
+                li{
+                    &:before{
+                        font-size: 1.4em !important;
+                    }
+                }
+            }    
+        }
+ 
+    }
+    .list{
+        a{
+            .infoRow{
+                li{
+                min-width: (100vw - $Hcell*3 - $Hcell*1.5 - 25vw) / 4 !important;
+                }
+            }
+        }
+    }
+    
+}
+#source_area{
+    width: $Hcell*3;
+    height: 100vh - $Vcell*4;
+    .source{
+        height: 100vh - $Vcell*8;
+    }
+    ul{
+        div{
+            width: 30px;
+            height: 30px;
+        }
+        li{
+            width: $Hcell*3 !important;
+            font-size: 0.8em !important;
+            span{
+                font-size: 0.8em !important;
+            }
+        }
+    }
+    hl{
+        font-size: 0.8em;
+    }
+    .tabs{
+        width: 100%;
+        button{
+            font-size: 0.9em;
+        }
+    }
+}
+    #float{
+        bottom: $Vcell*3;
+        .float-button{
+            span{
+                &:after{
+                    font-size: 1.5em;
+                } 
+            }
+        }
+    }
+}

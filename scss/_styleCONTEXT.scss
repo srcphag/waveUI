@@ -1,0 +1,180 @@
+// Container Sizing
+$context-menu-min-width: 8em !default;
+$context-menu-max-width: $context-menu-min-width * 2 !default;
+$context-menu-container-padding: .25em 0 !default;
+$context-menu-container-margin: .3em !default;
+$context-menu-border-radius: .2em !default;
+
+// Container Font
+$context-menu-font-family: inherit !default;
+$context-menu-font-size: inherit !default;
+
+// Container Color
+$context-menu-background-color: $white !default;
+$context-menu-border-width: 0px !default;
+$context-menu-border-style: unset !default;
+$context-menu-border-color: unset !default;
+$context-menu-box-shadow: $shadow !default;
+
+// Item Sizing
+$context-menu-padding-vertical: .2em !default;
+$context-menu-padding-horizontal: 2em !default;
+// Item Default
+$context-menu-item-padding: $context-menu-padding-vertical $context-menu-padding-horizontal !default;
+$context-menu-text-color: #2F2F2F !default;
+$context-menu-item-color: $context-menu-background-color !default;
+
+// Item Hover
+$context-menu-item-color-hover: $grey2 !default;
+$context-menu-text-color-hover: $black !default;
+
+// Item Disabled
+$context-menu-item-color-disabled: $context-menu-background-color !default;
+$context-menu-text-color-disabled: lighten($context-menu-text-color, 55) !default;
+
+// Submenu
+$context-menu-submenu-arrow-color: $context-menu-text-color !default;
+
+// Separator
+$context-menu-separator-height: 1px !default;
+$context-menu-separator-style: solid !default;
+$context-menu-separator-color: darken($context-menu-background-color, 10) !default;
+$context-menu-separator-margin: .35em 0 !default;
+
+// Icons
+$context-menu-icon-font-path: 'font/' !default;
+$context-menu-icon-font-name: 'context-menu-icons' !default;
+$context-menu-icon-size: 1em !default;
+$context-menu-icon-color: #2980B9;
+$context-menu-icon-color-hover: $context-menu-text-color-hover;
+
+@keyframes cm-spin {
+  0% {
+    -webkit-transform: translateY(-50%)  rotate(0deg);
+    transform: translateY(-50%) rotate(0deg)
+  }
+  100% {
+    -webkit-transform: translateY(-50%) rotate(359deg);
+    transform: translateY(-50%) rotate(359deg)
+  }
+}
+
+.context-menu-list {
+  background: $context-menu-background-color;
+  border: $context-menu-border-width $context-menu-border-style $context-menu-border-color;
+  border-radius: $context-menu-border-radius;
+  box-shadow: $context-menu-box-shadow;
+  display: inline-block;
+  font-family: $context-menu-font-family;
+  font-size: $context-menu-font-size;
+  list-style-type: none;
+  margin: $context-menu-container-margin;
+  max-width: $context-menu-max-width;
+  min-width: $context-menu-min-width;
+  padding: $context-menu-container-padding;
+  position: absolute;
+}
+
+.context-menu-item {
+  background-color: $context-menu-background-color;
+  box-sizing: content-box;
+  color: $context-menu-text-color;
+  padding: $context-menu-item-padding;
+  position: relative;
+  user-select: none;
+}
+
+.context-menu-separator {
+  border-bottom: $context-menu-separator-height $context-menu-separator-style $context-menu-separator-color;
+  margin: $context-menu-separator-margin;
+  padding: 0;
+}
+
+.context-menu-item > label > input,
+.context-menu-item > label > textarea {
+  user-select: text;
+}
+
+.context-menu-item.context-menu-hover {
+  background-color: $context-menu-item-color-hover;
+  color: $context-menu-text-color-hover;
+  transition: all $main-transition;
+  cursor: pointer;
+}
+
+.context-menu-item.context-menu-disabled {
+  background-color: $context-menu-item-color-disabled;
+  color: $context-menu-text-color-disabled;
+  cursor: default;
+}
+
+.context-menu-input.context-menu-hover {
+  cursor: default;
+  color: $context-menu-text-color;
+}
+
+.context-menu-submenu:after {
+  content: '';
+  border-style: solid;
+  border-width: .25em 0 .25em .25em;
+  border-color: transparent transparent transparent $context-menu-submenu-arrow-color;
+  height: 0;
+  position: absolute;
+  right: .5em;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  z-index: 1;
+}
+
+/**
+ * Inputs
+ */
+.context-menu-item.context-menu-input {
+  padding: .3em .6em;
+}
+
+/* vertically align inside labels */
+.context-menu-input > label > * {
+  vertical-align: top;
+}
+
+/* position checkboxes and radios as icons */
+.context-menu-input > label > input[type="checkbox"],
+.context-menu-input > label > input[type="radio"] {
+  margin-right: .4em;
+  position: relative;
+  top: .12em;
+}
+
+.context-menu-input > label {
+  margin: 0;
+}
+
+.context-menu-input > label,
+.context-menu-input > label > input[type="text"],
+.context-menu-input > label > textarea,
+.context-menu-input > label > select {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+}
+
+.context-menu-input > label > textarea {
+  height: 7em;
+}
+
+.context-menu-item > .context-menu-list {
+  display: none;
+  /* re-positioned by js */
+  right: -.3em;
+  top: .3em;
+}
+
+.context-menu-item.context-menu-visible > .context-menu-list {
+  display: block;
+}
+
+.context-menu-accesskey {
+  text-decoration: underline;
+}

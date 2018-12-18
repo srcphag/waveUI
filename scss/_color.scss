@@ -1,0 +1,21 @@
+//////////////////////////////////////////////* */
+//  main
+//////////////////////////////////////////////* */
+.mainColor{
+    background-color: $main;
+    &:before{
+        background-color: $main;
+    }
+}
+.mainColorFill{
+    fill:  $main !important; 
+}
+//////////////////////////////////////////////* */
+//  secondary
+//////////////////////////////////////////////* */
+.secondaryColor{
+    background-color: $secondary;
+}
+.secondaryColorFill{
+    fill: $secondary;
+}

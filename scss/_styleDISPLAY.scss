@@ -1,0 +1,113 @@
+    main#display{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    .art{
+        width: 45vw;
+        background-color: $grey1;
+        display: flex;
+        @extend %centercenter_cell;
+        position: relative;
+        z-index: 1;
+        div{
+            width: 30vw;
+            height: 30vw;
+            background-color: $secondary;
+            background-image: url(../img/cover_test.jpg);
+            background-size: cover;
+            border-radius: $radius;
+            box-shadow: $shadow;
+            position: absolute;
+            &:before{
+                content: "";
+                position: absolute;
+                display: block;
+                width: 30vw;
+                height: 30vw;
+                background-color: $grey3;
+                // border: 4px solid $grey3;
+                background-size: cover;
+                border-radius: $radius;
+                @extend %active_play;
+                filter: blur(3px);
+                z-index: -1;
+            }
+        }
+    }
+    .info{
+        width: 55vw;
+        @extend %centercenter_cell;
+        .wrapper{
+            width: 100%;
+            height: 30vw;
+            background-color: $white;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            flex-direction: column;
+            padding: 0 2vw;
+            h1{
+                font-weight: 300;
+                font-size: 4em;
+                display: flex;
+                align-items: center;
+                padding: 0;
+                margin: 0;
+                &:before{
+                    content: "\004e";
+                    font-family: admira;
+                    color: $secondary;
+                    font-size: 1.5em;
+                    width: 90px;
+                }
+            }
+            h2{
+                font-size: 3em;
+                font-weight: 200;
+                position: relative;
+                left: 85px;
+                &:before{
+                    content: "By ";
+                }
+
+            }
+        }
+    }
+    .playerID{
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        font-size: 1.5em;
+        font-weight: 300;
+        padding: 3vw;
+        color: $grey3;
+    }
+}
+
+@media (orientation: portrait) {
+    main#display{
+        flex-direction: column;
+        .art{
+            width: 100vw;
+            height: 60vh;
+            div{
+                width: 40vh;
+                height: 40vh;
+                &:before{
+                    width: 40vh;
+                    height: 40vh;
+                }
+            }
+        }
+        .info{
+            width: 100vw;
+            height: 40vh;
+            .wrapper{
+                width: 40vh;
+                height: 100%;
+                padding: 4vh 0;
+            }
+        }
+    }
+}

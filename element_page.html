@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i" rel="stylesheet">
+            
+    <script src="js/modernizr.js"></script>
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/interactjs@1.3/dist/interact.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.28.2/dist/sweetalert2.all.min.js"></script>
+    <script src="js/jQuery.tagify.js"></script>
+    <script src="js/colorPick.js"></script>
+    <script src="js/nouislider.js"></script>
+    <script src="js/jquery.selectric.js"></script>
+    <script src="js/ohsnap.js"></script>
+    <script src="js/tippy.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://swisnl.github.io/jQuery-contextMenu/dist/jquery.contextMenu.js" type="text/javascript"></script>
+    <script src="https://swisnl.github.io/jQuery-contextMenu/dist/jquery.ui.position.min.js" type="text/javascript"></script>
+    <script src="https://swisnl.github.io/jQuery-contextMenu/js/main.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js'></script>
+    <script src="js/jquery.ui.touch-punch.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js"></script>
+    <script src="https://jweir.github.io/colorwheel/colorwheel.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+</head>
+<body id="index">
+<div id="ohsnap"></div>
+<div class="grid-container">
+<!-- //////////////////////////////////////////////
+ //  header
+////////////////////////////////////////////// -->  
+    <header>
+        <div class="logo">
+            <span id="launcher"></span>
+            <span id="menu"></span>
+            <div class="img"></div>
+            <div class="dropdown player"><span>Get Player</span>
+                <ul>
+                    <li id="windows"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNSAyNS4wNzciPjxkZWZzPjxzdHlsZT4uYXtmaWxsOiNmZmY7fTwvc3R5bGU+PC9kZWZzPjxwYXRoIGNsYXNzPSJhIiBkPSJNMCwzLjU1MSwxMC4yMTcsMi4xNTlsMCw5Ljg1NUwuMDA5LDEyLjA3MlptMTAuMjEyLDkuNi4wMDgsOS44NjNMLjAwOCwyMS42MDlWMTMuMDgzWk0xMS40NSwxLjk3NywyNSwwVjExLjg4OUwxMS40NSwxMlpNMjUsMTMuMjQybDAsMTEuODM1TDExLjQ1LDIzLjE2NWwtLjAxOS05Ljk0NVoiLz48L3N2Zz4=">Windows</li>
+                    <li id="apple"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNSAyOS42OCI+PGRlZnM+PHN0eWxlPi5he2ZpbGw6I2ZmZjt9PC9zdHlsZT48L2RlZnM+PHBhdGggY2xhc3M9ImEiIGQ9Ik00MS4yNDYsMjcuMTI5QTE2LjEzNiwxNi4xMzYsMCwwLDEsMzkuNjUsMzBhMTQuNTc3LDE0LjU3NywwLDAsMS0yLjA1NiwyLjQ4NCwzLjk4NywzLjk4NywwLDAsMS0yLjY0MiwxLjE2Myw2LjYyMSw2LjYyMSwwLDAsMS0yLjQ0LS41ODMsNyw3LDAsMCwwLTIuNjI3LS41ODEsNy4yNCw3LjI0LDAsMCwwLTIuNy41ODEsNy4yNjksNy4yNjksMCwwLDEtMi4zMzQuNjE0LDMuNzU0LDMuNzU0LDAsMCwxLTIuNy0xLjE5NEExNS4zMDYsMTUuMzA2LDAsMCwxLDIwLDI5LjkxYTE3Ljc4OSwxNy43ODksMCwwLDEtMi4yNzQtNC41MTYsMTYuNTM2LDE2LjUzNiwwLDAsMS0uOTU1LTUuMzgyLDkuODI5LDkuODI5LDAsMCwxLDEuMjkxLTUuMTQyLDcuNTcxLDcuNTcxLDAsMCwxLDIuNy0yLjczNEE3LjI3Miw3LjI3MiwwLDAsMSwyNC40MTgsMTEuMWE4LjYwNSw4LjYwNSwwLDAsMSwyLjgyNy42NTgsOS4wODcsOS4wODcsMCwwLDAsMi4yNDIuNjU5LDEzLjQxNiwxMy40MTYsMCwwLDAsMi40ODYtLjc3Nyw4LjIxOCw4LjIxOCwwLDAsMSwzLjM3OS0uNkE3LjE3NSw3LjE3NSwwLDAsMSw0MC45NzMsMTRhNi4yNTIsNi4yNTIsMCwwLDAtMy4zMTYsNS42OEE2LjI2Niw2LjI2NiwwLDAsMCwzOS43MTQsMjQuNGE2Ljc2MSw2Ljc2MSwwLDAsMCwyLjA1NiwxLjM0OHEtLjI0Ny43MTctLjUyNCwxLjM3NlpNMzUuNTE5LDQuNTkzQTYuMzMyLDYuMzMyLDAsMCwxLDMzLjksOC43NDYsNS41Myw1LjUzLDAsMCwxLDI5LjMsMTEuMDEzYTQuNjIsNC42MiwwLDAsMS0uMDM0LS41NjIsNi41MDUsNi41MDUsMCwwLDEsMS43MjItNC4yLDYuNjMsNi42MywwLDAsMSwyLjEtMS41NzUsNi4yNTUsNi4yNTUsMCwwLDEsMi40LS42OCw1LjM5MSw1LjM5MSwwLDAsMSwuMDMxLjU5NFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xNi43NyAtMy45OTkpIi8+PC9zdmc+">Mac</li>
+                    <li id="ubuntu"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACkAAAArCAYAAADlqKH9AAAACXBIWXMAAAsSAAALEgHS3X78AAACvUlEQVRYhc1Z7Y3bMAzlFfnfbFBtcN6g7gYewSNkg2YEb9B0g3QDj+AN6k5QZwIdVJB3jEzqKxLSBxBILJt6ocgnynmx1sJ/gB4pLACw7eg4kk+00Vq72XucfT7PJNhbHXdEPz1xpU+BsZF/OTQkcQSAjn2fhXENX1qRdIQGLIKvyj03JDtkea6QW8ZaOwfyS0KHeafhUqtwDJr7nEtyxucuwthirT3WIDmgdNBkoUqNRcvJ0ITfR59gKcnRm8wR1qISw4L+DJIbMBXu5szdcZw0/PCu/cGicdX6mxXIwiqaKl0rKA73rLnbeTIi2Am7A4HEd8Cl13wcMXJrQoSLlnsJOF0L0uYUIXrOJRlyuKvGSquzkXqkOtMcPUKQLKQMl1SSfjVz7Cqx0DRhd8E5pji9Kg52LdWDphXT6HdBHe69PWsAjCIVU452JeCs3NJzafAjtrEdwM/Ja+UoEgcJC90wBfKuF/Ky9lKTiTJHO05o2/mJDepfdu2b0B/WwOT1oP9wYIcgDUY8HLWB2K0fcI8NYYt00TUxioWKuRDqBwchJ0+NclLkwStLStoJx3wNa1HdoARppTPOhgnLw33FVFj8gxHT0Zq5OirXl+IlaCBD2jynlIe1Dmir0FyQDcocDibFgbTjEOYKBEPtWnIXBDnHz0wzkWa6yyEZiqZDSUT7iM/3H18rb8hhl5CnJuFkuXI/uadF10599665012HcrQCwGcA+MXki+TNoHS9Rua44X0fO2HBMvlRICkKdVIaNnyuRztL3X5pwlMh0SnRFBCccUkNypxI8BGSlPjkVDtiaKADnBT93Zb7qMZRFENVKmGIFOJUmyRJ1JgYUUqRUOe1cf+t/n2gd0MGjbr4FQ3wWujd0At9aPU6OtZIx3Dj4898sX9JHquUk6UmVTdJU/OczAH9IeBAjfYHAOANwbpLEpBSu3EAAAAASUVORK5CYII=">Ubuntu</li>
+                    <li id="android"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNSAyOS41NDYiPjxkZWZzPjxzdHlsZT4uYXtmaWxsOiNmZmY7fTwvc3R5bGU+PC9kZWZzPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC00Mi41NDQgMCkiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQyLjU0NCAwKSI+PHBhdGggY2xhc3M9ImEiIGQ9Ik00NC4zNzMsMTc5LjE0MWExLjc2NCwxLjc2NCwwLDAsMC0xLjMuNTMzLDEuNzQzLDEuNzQzLDAsMCwwLS41MzMsMS4yNzh2Ny42MzVhMS44MTksMS44MTksMCwwLDAsMS44MjksMS44MjksMS43MzcsMS43MzcsMCwwLDAsMS4yODgtLjUzMywxLjc4LDEuNzgsMCwwLDAsLjUyNC0xLjN2LTcuNjM1YTEuODE4LDEuODE4LDAsMCwwLTEuODExLTEuODExWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTQyLjU0NCAtMTY5LjU3MSkiLz48cGF0aCBjbGFzcz0iYSIgZD0iTTEzNC45LDIuNzE3LDEzNi4xNjMuMzkxYS4yMzQuMjM0LDAsMCwwLS4wODktLjM1NS4yNDYuMjQ2LDAsMCwwLS4zNTUuMTA2bC0xLjI3OCwyLjM0NGE4LjkwNiw4LjkwNiwwLDAsMC03LjEzOCwwTDEyNi4wMjQuMTQyYS4yNDYuMjQ2LDAsMCwwLS4zNTUtLjEwNi4yMzMuMjMzLDAsMCwwLS4wODkuMzU1bDEuMjYxLDIuMzI2YTcuNzg1LDcuNzg1LDAsMCwwLTMuMDU0LDIuNzI2LDYuODg0LDYuODg0LDAsMCwwLTEuMTM2LDMuODI3aDE2LjQyNGE2Ljg4Niw2Ljg4NiwwLDAsMC0xLjEzNi0zLjgyN0E3LjgxOCw3LjgxOCwwLDAsMCwxMzQuOSwyLjcxN1pNMTI3LjYxMyw2LjFhLjY2Ni42NjYsMCwwLDEtLjQ4OC4yLjYzNS42MzUsMCwwLDEtLjQ3OS0uMi43MDguNzA4LDAsMCwxLDAtLjk3Ni42MzguNjM4LDAsMCwxLC40NzktLjIuNjkuNjksMCwwLDEsLjQ4OCwxLjE4Wm03LjQ4NCwwYS42MzcuNjM3LDAsMCwxLS40NzkuMi42OTIuNjkyLDAsMCwxLDAtMS4zODUuNjM4LjYzOCwwLDAsMSwuNDc5LjIuNzA4LjcwOCwwLDAsMSwwLC45NzZaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTE4LjM3MSAwKSIvPjxwYXRoIGNsYXNzPSJhIiBkPSJNMTIzLjk3MSwxOTcuMjc1YTEuOTM5LDEuOTM5LDAsMCwwLDEuOTUzLDEuOTUzaDEuMzE0bC4wMTgsNC4wMzFhMS43NjUsMS43NjUsMCwwLDAsLjUzMywxLjMsMS43NDQsMS43NDQsMCwwLDAsMS4yNzguNTMzLDEuODE5LDEuODE5LDAsMCwwLDEuODI5LTEuODI5di00LjAzMWgyLjQ1djQuMDMxYTEuODI5LDEuODI5LDAsMSwwLDMuNjU3LDB2LTQuMDMxaDEuMzMyYTEuOTM5LDEuOTM5LDAsMCwwLDEuOTM1LTEuOTUzVjE4NS40NWgtMTYuM1oiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMTkuNjIxIC0xNzUuNTQzKSIvPjxwYXRoIGNsYXNzPSJhIiBkPSJNNDQ0LjE4NywxNzkuMTQxYTEuNzU5LDEuNzU5LDAsMCwwLTEuMjc4LjUyNCwxLjczNiwxLjczNiwwLDAsMC0uNTMzLDEuMjg3djcuNjM1YTEuNzYzLDEuNzYzLDAsMCwwLC41MzMsMS4zLDEuNzQ0LDEuNzQ0LDAsMCwwLDEuMjc4LjUzMywxLjgxOSwxLjgxOSwwLDAsMCwxLjgyOS0xLjgyOXYtNy42MzVhMS43MzYsMS43MzYsMCwwLDAtLjUzMy0xLjI4N0ExLjc4MSwxLjc4MSwwLDAsMCw0NDQuMTg3LDE3OS4xNDFaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNDIxLjAxNiAtMTY5LjU3MSkiLz48L2c+PC9nPjwvc3ZnPg==">Android</li>
+                    <li id="android_html5"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNSAyOS41NDYiPjxkZWZzPjxzdHlsZT4uYXtmaWxsOiNmZmY7fTwvc3R5bGU+PC9kZWZzPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC00Mi41NDQgMCkiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQyLjU0NCAwKSI+PHBhdGggY2xhc3M9ImEiIGQ9Ik00NC4zNzMsMTc5LjE0MWExLjc2NCwxLjc2NCwwLDAsMC0xLjMuNTMzLDEuNzQzLDEuNzQzLDAsMCwwLS41MzMsMS4yNzh2Ny42MzVhMS44MTksMS44MTksMCwwLDAsMS44MjksMS44MjksMS43MzcsMS43MzcsMCwwLDAsMS4yODgtLjUzMywxLjc4LDEuNzgsMCwwLDAsLjUyNC0xLjN2LTcuNjM1YTEuODE4LDEuODE4LDAsMCwwLTEuODExLTEuODExWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTQyLjU0NCAtMTY5LjU3MSkiLz48cGF0aCBjbGFzcz0iYSIgZD0iTTEzNC45LDIuNzE3LDEzNi4xNjMuMzkxYS4yMzQuMjM0LDAsMCwwLS4wODktLjM1NS4yNDYuMjQ2LDAsMCwwLS4zNTUuMTA2bC0xLjI3OCwyLjM0NGE4LjkwNiw4LjkwNiwwLDAsMC03LjEzOCwwTDEyNi4wMjQuMTQyYS4yNDYuMjQ2LDAsMCwwLS4zNTUtLjEwNi4yMzMuMjMzLDAsMCwwLS4wODkuMzU1bDEuMjYxLDIuMzI2YTcuNzg1LDcuNzg1LDAsMCwwLTMuMDU0LDIuNzI2LDYuODg0LDYuODg0LDAsMCwwLTEuMTM2LDMuODI3aDE2LjQyNGE2Ljg4Niw2Ljg4NiwwLDAsMC0xLjEzNi0zLjgyN0E3LjgxOCw3LjgxOCwwLDAsMCwxMzQuOSwyLjcxN1pNMTI3LjYxMyw2LjFhLjY2Ni42NjYsMCwwLDEtLjQ4OC4yLjYzNS42MzUsMCwwLDEtLjQ3OS0uMi43MDguNzA4LDAsMCwxLDAtLjk3Ni42MzguNjM4LDAsMCwxLC40NzktLjIuNjkuNjksMCwwLDEsLjQ4OCwxLjE4Wm03LjQ4NCwwYS42MzcuNjM3LDAsMCwxLS40NzkuMi42OTIuNjkyLDAsMCwxLDAtMS4zODUuNjM4LjYzOCwwLDAsMSwuNDc5LjIuNzA4LjcwOCwwLDAsMSwwLC45NzZaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTE4LjM3MSAwKSIvPjxwYXRoIGNsYXNzPSJhIiBkPSJNMTIzLjk3MSwxOTcuMjc1YTEuOTM5LDEuOTM5LDAsMCwwLDEuOTUzLDEuOTUzaDEuMzE0bC4wMTgsNC4wMzFhMS43NjUsMS43NjUsMCwwLDAsLjUzMywxLjMsMS43NDQsMS43NDQsMCwwLDAsMS4yNzguNTMzLDEuODE5LDEuODE5LDAsMCwwLDEuODI5LTEuODI5di00LjAzMWgyLjQ1djQuMDMxYTEuODI5LDEuODI5LDAsMSwwLDMuNjU3LDB2LTQuMDMxaDEuMzMyYTEuOTM5LDEuOTM5LDAsMCwwLDEuOTM1LTEuOTUzVjE4NS40NWgtMTYuM1oiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMTkuNjIxIC0xNzUuNTQzKSIvPjxwYXRoIGNsYXNzPSJhIiBkPSJNNDQ0LjE4NywxNzkuMTQxYTEuNzU5LDEuNzU5LDAsMCwwLTEuMjc4LjUyNCwxLjczNiwxLjczNiwwLDAsMC0uNTMzLDEuMjg3djcuNjM1YTEuNzYzLDEuNzYzLDAsMCwwLC41MzMsMS4zLDEuNzQ0LDEuNzQ0LDAsMCwwLDEuMjc4LjUzMywxLjgxOSwxLjgxOSwwLDAsMCwxLjgyOS0xLjgyOXYtNy42MzVhMS43MzYsMS43MzYsMCwwLDAtLjUzMy0xLjI4N0ExLjc4MSwxLjc4MSwwLDAsMCw0NDQuMTg3LDE3OS4xNDFaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNDIxLjAxNiAtMTY5LjU3MSkiLz48L2c+PC9nPjwvc3ZnPg==">Android HTML5</li>
+                    <li id="ios"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMSAxNS4zODEiPjxkZWZzPjxzdHlsZT4uYXtmaWxsOiNmZmY7fTwvc3R5bGU+PC9kZWZzPjxwYXRoIGNsYXNzPSJhIiBkPSJNLjgxNiwxNS43MTJIMy4zOFY0LjhILjgxNlYxNS43MTJaTTIuMDkzLDMuMzY4YTEuNCwxLjQsMCwxLDAsMC0yLjc5LDEuNCwxLjQsMCwxLDAsMCwyLjc5Wk0xMS45MTUuNjA5Yy00LjMzNCwwLTcuMDUyLDIuOTU1LTcuMDUyLDcuNjhzMi43MTgsNy42Nyw3LjA1Miw3LjY3LDcuMDQyLTIuOTQ0LDcuMDQyLTcuNjdTMTYuMjM5LjYwOSwxMS45MTUuNjA5Wm0wLDIuMjY1YzIuNjQ2LDAsNC4zMzQsMi4xLDQuMzM0LDUuNDE1cy0xLjY4OCw1LjQwNS00LjMzNCw1LjQwNS00LjMzNC0yLjEtNC4zMzQtNS40MDUsMS42NzgtNS40MTUsNC4zMzQtNS40MTVabTguMTIzLDguNjU4Yy4xMTMsMi43MzksMi4zNTgsNC40MjcsNS43NzYsNC40MjcsMy41OTMsMCw1Ljg1OC0xLjc3MSw1Ljg1OC00LjU5MiwwLTIuMjEzLTEuMjc3LTMuNDU5LTQuMjkzLTQuMTQ5TDI1LjY3LDYuODI3QzIzLjg0OCw2LjQsMjMuMSw1LjgxOCwyMy4xLDQuODNjMC0xLjIzNSwxLjEzMi0yLjA1OSwyLjgxMS0yLjA1OSwxLjcsMCwyLjg2Mi44MzQsMi45ODYsMi4yMjRoMi41MzNDMzEuMzYzLDIuMzgsMjkuMi42MDksMjUuOTI3LjYwOSwyMi42OTQuNjA5LDIwLjQsMi4zOSwyMC40LDUuMDI2YzAsMi4xMjEsMS4zLDMuNDM5LDQuMDM2LDQuMDY3bDEuOTI1LjQ1M0MyOC4yMzMsOS45ODgsMjksMTAuNjA2LDI5LDExLjY3N2MwLDEuMjM1LTEuMjQ2LDIuMTIxLTMuMDM3LDIuMTIxLTEuODEyLDAtMy4xODEtLjktMy4zNDYtMi4yNjVIMjAuMDM4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNjcyIC0wLjU3OCkiLz48L3N2Zz4=">IOS</li>
+                </ul>
+            </div>
+        </div> 
+        <div class="tools">
+            <input placeholder="Search item"/>
+            <button></button>
+            <div class="dropdown language"><span>EN</span>
+                <ul>
+                    <li>CA</li> 
+                    <li>ES</li>
+                    <li>FR</li>
+                    <li>PT</li> 
+                </ul>
+            </div>
+            <div class="dropdown user">
+                <span>
+                    <div class="notification">26</div>
+                </span>
+                    <ul>
+                        <li>User</li>
+                        <li>Notifications</li>
+                        <li>Logout</li>
+                    </ul>
+            </div>
+        </div>   
+    </header>
+    <div id="body">
+<!-- //////////////////////////////////////////////
+ //  nav
+////////////////////////////////////////////// -->
+        <nav id="nav">
+            <div class="wrapper">
+                <div class="navigator">
+                    <h2 id="infoPag"></h2>
+                </div>
+                <ul>
+                    <a href="list.html" class="tip" title="Configure your buildings"><li class="events nav">Events</li></a>
+                    <a href="element_page.html" class="tip" title="manage your events"><li class="buildings nav">Buildings</li></a>
+                </ul>
+            </div>
+            <div class="close"></div>
+        </nav>
+<!-- //////////////////////////////////////////////
+ //  source area
+////////////////////////////////////////////// -->
+        <div id="work">
+            <div id="source_area">
+                    <ul class="tabs">
+                            <li><button class="tablink active">Selector</button></li>
+                            <!-- <li><button class="tablink">schedules</button></li> -->
+                        </ul>
+                       <div id="filter">
+                            <ul>
+                                <li class="index">Name</li>
+                            </ul>
+                       </div>
+                        <div id="albums" class="source">
+                            <div class="accordion album">
+                                    <ul class="contextSourceSchedule tip 1level" title="Schedule example" style="background-color:#f0f0f0;">
+                                        <div></div>
+                                        <hl>Source item 1</hl>
+                                    </ul>
+                                        <ol class="accordion-content 2level" data-id="5438" style="display: block;">
+                                            <li><span>Level 1</span></li>
+                                                <ol class="level3">
+                                                    <li><div class="status open"></div><span>Room 1</span></li>
+                                                    <li><div class="status closed"></div><span>Room 2</span></li>
+                                                    <li><div class="status"></div><span>Room 3</span></li>
+                                                </ol>
+                                            <li><span>Level 2</span></li>
+                                            <li><span>Level 3</span></li>
+                                        </ol>
+                                    <ul class="contextSourceSchedule tip">
+                                        <div></div>
+                                        <hl>Source item 2</hl>
+                                    </ul>
+                                    <ul class="contextSourceSchedule tip">
+                                        <div></div>
+                                        <hl>Source item 3</hl>
+                                    </ul>
+                                    <ul class="contextSourceSchedule tip">
+                                        <div></div>
+                                        <hl>Source item 4</hl>
+                                    </ul>
+                                    <ul class="contextSourceSchedule tip">
+                                        <div></div>
+                                        <hl>Source item 5</hl>
+                                    </ul>
+                                    <ul class="contextSourceSchedule tip">
+                                        <div></div>
+                                        <hl>Source item 6</hl>
+                                    </ul>
+                                </div>
+                        </div>
+                        <div id="schedules" class="source" style="display:none">
+                            <div class="accordion schedule">
+                                <ul class="contextSourceSchedule tip" title="Schedule example">
+                                    <div></div>
+                                    <hl>Source item 1</hl>
+                                </ul>
+                                <ul class="contextSourceSchedule tip">
+                                    <div></div>
+                                    <hl>Source item 2</hl>
+                                </ul>
+                                <ul class="contextSourceSchedule tip">
+                                    <div></div>
+                                    <hl>Source item 3</hl>
+                                </ul>
+                                <ul class="contextSourceSchedule tip">
+                                    <div></div>
+                                    <hl>Source item 4</hl>
+                                </ul>
+                                <ul class="contextSourceSchedule tip">
+                                    <div></div>
+                                    <hl>Source item 5</hl>
+                                </ul>
+                                <ul class="contextSourceSchedule tip">
+                                    <div></div>
+                                    <hl>Source item 6</hl>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+            </div>       
+ <!-- //////////////////////////////////////////////
+ //  main
+////////////////////////////////////////////// -->           
+<main class="minMain"><div id="player-page">
+    <div class="main_head clean">
+        <div> 
+            <h1><span>Hotel Gran Vía</span><span>floor 1</span><span>360 Experience</span></h1>
+            <h2>Direction of the place</h2>
+            <div class="edit"></div>
+        </div>      
+    </div>
+    <div id="drawer">
+            <div class="tools">
+                    <input type="text" class="color" value="#535353"/>
+                    <div class="colorwheel"></div>
+                        <form action="https://codepen.io/pen/define" method="POST" target="_blank">
+                        <input type="hidden" name="data" class="export">
+                        <input type="submit" value="Export">
+                        </form>
+                    <br>              
+            </div>
+
+            <div class="scene">
+                <div class="layer n2">
+                    <canvas class="grid"></canvas>
+                        <div class="draw"></div>
+                        <style class="css">.draw {}</style>
+                </div>
+            
+                
+                <div class="layer n1">
+                    <canvas class="grid"></canvas>
+                            <div class="draw"></div>
+                            <style class="css">.draw {}</style>
+                </div>
+               
+
+                <div class="layer n0">
+                    <canvas class="grid"></canvas>
+                            <div class="draw"></div>
+                            <style class="css">.draw {}</style>
+                </div>
+               
+            </div>
+
+<div id="ctrl">
+    <div class="ctrlErase">  
+        <button class="reset"></button>           
+    </div>
+        
+    <div class="ctrlRotate">  
+        <button class="reset"></button>            
+    </div>
+        
+    <div class="ctrlLayer">
+        <div class="ctrlIcon"></div>
+        <div id="selector"></div>
+    </div>
+</div>  
+
+<div class="helper">Hold: Shift to Draw; Ctrl Erase; Alt ColorPick</div>   
+
+</div>
+    <div id="float">
+        <div class="float-button tip edit" id="openerPlayer" title="Add a new album">
+            <span></span>
+        </div>
+        <div class="float-button tip" id="openerPlayer" title="Add a new album">
+            <span></span>
+        </div>
+        <!-- <div class="shadow"></div> -->
+    </div> 
+
+</main>
+<!-- //////////////////////////////////////////////
+//  info_area
+////////////////////////////////////////////// -->  
+            <div id="info_area" class="showInfo">
+                    <div class="container opacity1">
+                            <div class="tab">  
+                                <div class="close" onclick="hideInfo()"><i class="material-icons md-18">close</i></div>
+                                <div class="title">
+                                    <h3>Events<span> 360 Experience</span></h3>
+                                </div>  
+                            </div> 
+                            <div class="wrapper">
+                                <form>
+                                    <label>Name</label>
+                                    <input/>
+             
+                                    <label>Floors</label>
+                                    <input/>
+             
+                                    <label>Location</label>
+                                    <input/>
+                                </form> 
+                            </div>
+                           <button>Add Floor</button>
+                           <button>Add Room</button>
+                    </div>
+            </div>
+        </div>
+    </div>  
+ <!-- //////////////////////////////////////////////
+ //  spinner
+////////////////////////////////////////////// -->  
+    <div id="spinner">
+        <span></span>
+        <div></div>
+    </div>
+        <div></div>
+    </div>
+</div>    
+ <!-- //////////////////////////////////////////////
+ //  app-selector
+////////////////////////////////////////////// -->  
+<div class="wrapper-selector">
+        <div class="triangle"></div>
+        <div id="app-selector">
+                <!--<span class="zmdi zmdi-apps color_principal_light {{appSelector.ui.showAppSelector}}" type="button" id="app-selector" data-ng-click="appSelector.toggleAppSelector()"></span>-->
+                <ul id="admira-apps"  data-ng-show="appSelector.ui.showAppSelector">
+                    <li data-ng-repeat="app in appSelector.apps" data-ng-click="appSelector.selectApp(app.url)" data-ng-class="{'hide': app.project == '3237'}">
+                        <a class="" data-ng-href="http://dashboard.admira.com" title="Ir a Dashboard" target="_blank" href="http://dashboard.admira.com">
+                                <img src="img/appSelector/dashboard.svg" class="svg icon">
+                                <div class="label">Dashboard</div>
+                            </span>
+                            
+                        </a>
+                    </li>   <li data-ng-repeat="app in appSelector.apps" data-ng-click="appSelector.selectApp(app.url)" data-ng-class="{'hide': app.project == '3237'}">
+                        <a class="" data-ng-href="http://new.admira.mobi" title="Ir a Digital Signage" target="_blank" href="http://new.admira.mobi">
+                              
+                            <span data-ng-if="app.type === 'image'" class="ng-scope">
+                                <img src="img/appSelector/digital_signage.svg" class="svg icon">
+                                <div class="label">Digital Signage</div>
+                            </span> 
+                            
+                        </a>
+                    </li>   <li data-ng-repeat="app in appSelector.apps" data-ng-click="appSelector.selectApp(app.url)" data-ng-class="{'hide': app.project == '3237'}" >
+                        <a class="" data-ng-href="http://catalog.admira.com" title="Ir a Catálogo de contenidos" target="_blank" href="http://catalog.admira.com">
+                              
+                            <span data-ng-if="app.type === 'image'" class="ng-scope">
+                                <img src="img/appSelector/catalog.svg" class="svg icon">
+                                <div class="label">Catálogo de contenidos</div>
+                            </span> 
+                            
+                        </a>
+                    </li>   <li data-ng-repeat="app in appSelector.apps" data-ng-click="appSelector.selectApp(app.url)" data-ng-class="{'hide': app.project == '3237'}">
+                        <a class="" data-ng-href="http://desk.admira.com" title="Ir a Soporte" target="_blank" href="http://desk.admira.com">
+                              
+                            <span data-ng-if="app.type === 'image'" class="ng-scope">
+                                <img src="img/appSelector/soporte.svg" class="svg icon">
+                                <div class="label">Soporte</div>
+                            </span> 
+                            
+                        </a>
+                    </li>   <li data-ng-repeat="app in appSelector.apps" data-ng-click="appSelector.selectApp(app.url)" data-ng-class="{'hide': app.project == '3237'}">
+                        <a class="" data-ng-href="https://admin.sr.admira.com/" title="Ir a Gestión App" target="_blank" href="https://admin.sr.admira.com/">
+                              
+                            <span data-ng-if="app.type === 'image'" class="ng-scope">
+                                <img src="img/appSelector/push_notifications.svg" class="svg icon">
+                                <div class="label">Gestión App</div>
+                            </span> 
+                            
+                        </a>
+                    </li>   <li data-ng-repeat="app in appSelector.apps" data-ng-click="appSelector.selectApp(app.url)" data-ng-class="{'hide': app.project == '3237'}">
+                        <a class="" data-ng-href="https://onesignal.com/" title="Ir a Push Notifications" target="_blank" href="https://onesignal.com/">
+                              
+                            <span data-ng-if="app.type === 'image'" class="ng-scope">
+                                <img src="img/appSelector/push_notifications.svg" class="svg icon">
+                                <div class="label">Push Notifications</div>
+                            </span> 
+                            
+                        </a>
+                    </li>   <li class="disabled" data-ng-repeat="app in appSelector.apps" data-ng-click="appSelector.selectApp(app.url)" data-ng-class="{'hide': app.project == '3237'}">
+                        <a data-ng-href="" title="Ir a IoT Manager" target="_blank">
+                              
+                            <span data-ng-if="app.type === 'image'" class="ng-scope">
+                                <img src="img/appSelector/iot.svg" class="svg icon">
+                                <div class="label">IoT Manager</div>
+                            </span> 
+                            
+                        </a>
+                    </li>   <li class="disabled" data-ng-repeat="app in appSelector.apps" data-ng-click="appSelector.selectApp(app.url)" data-ng-class="{'hide': app.project == '3237'}">
+                        <a class="disabled" data-ng-href="" title="Ir a Video analytics" target="_blank">
+                              
+                            <span data-ng-if="app.type === 'image'" class="ng-scope">
+                                <img src="img/appSelector/video_analytics.svg" class="svg icon">
+                                <div class="label">Video analytics</div>
+                            </span> 
+                            
+                        </a>
+                    </li>   <li class="disabled" data-ng-repeat="app in appSelector.apps" data-ng-click="appSelector.selectApp(app.url)" data-ng-class="{'hide': app.project == '3237'}">
+                        <a class="disabled" data-ng-href="" title="Ir a Radio analytics" target="_blank">
+                              
+                            <span data-ng-if="app.type === 'image'" class="ng-scope">
+                                <img src="img/appSelector/radio_analytics.svg" class="svg icon">
+                                <div class="label">Radio analytics</div>
+                            </span> 
+                            
+                        </a>
+                    </li>   <li class="disabled" data-ng-repeat="app in appSelector.apps" data-ng-click="appSelector.selectApp(app.url)" data-ng-class="{'hide': app.project == '3237'}">
+                        <a class="disabled pointer" data-ng-href="https://meraki.cisco.com/" title="Ir a Social Wifi" target="_blank" href="https://meraki.cisco.com/">
+                              
+                            <span data-ng-if="app.type === 'image'" class="ng-scope">
+                                <img src="img/appSelector/social_wifi.svg" class="svg icon">
+                                <div class="label">Social Wifi</div>
+                            </span> 
+                            
+                        </a>
+                    </li>   <li class="disabled" data-ng-repeat="app in appSelector.apps" data-ng-click="appSelector.selectApp(app.url)" data-ng-class="{'hide': app.project == '3237'}">
+                        <a class="disabled" data-ng-href="" title="Ir a Gestor de turnos" target="_blank">
+                              
+                            <span data-ng-if="app.type === 'image'" class="ng-scope">
+                                <img src="img/appSelector/turnos.svg" class="svg icon">
+                                <div class="label">Gestor de turnos</div>
+                            </span>
+                            
+                        </a>
+                    </li>   <li class="disabled" data-ng-repeat="app in appSelector.apps" data-ng-click="appSelector.selectApp(app.url)" data-ng-class="{'hide': app.project == '3237'}">
+                        <a class="disabled" data-ng-href="" title="Ir a Reserva de salas" target="_blank">
+        
+                            <span data-ng-if="app.type === 'image'" class="ng-scope" class="svg icon">
+                                <img src="img/appSelector/push_notifications.svg" >
+                                <div class="label">Reserva de salas</div>
+                            </span>
+                            
+                        </a>
+                    </li><li class="disabled" data-ng-repeat="app in appSelector.apps" data-ng-click="appSelector.selectApp(app.url)" data-ng-class="{'hide': app.project == '3237'}">
+                        <a class="disabled" data-ng-href="" title="Ir a Hilo musical" target="_blank">
+        
+                            <span data-ng-if="app.type === 'image'" class="ng-scope">
+                                <img  src="img/appSelector/music.svg" class="svg icon">
+                                <div class="label">Hilo musical</div>
+                            </span>
+                        </a>
+                    </li>   <li class="disabled" data-ng-repeat="app in appSelector.apps" data-ng-click="appSelector.selectApp(app.url)" data-ng-class="{'hide': app.project == '3237'}">
+                        <a class="disabled" data-ng-href="" title="Ir a Marketing sensorial" target="_blank">
+        
+                            <span data-ng-if="app.type === 'image'" class="ng-scope">
+                                <img src="img/appSelector/marketing_sensorial.svg" class="svg icon">
+                                <div class="label">Marketing sensorial</div>
+                            </span> 
+                            
+                        </a>
+                    </li>   <li class="disabled" data-ng-repeat="app in appSelector.apps" data-ng-click="appSelector.selectApp(app.url)" data-ng-class="{'hide': app.project == '3237'}">
+                        <a class="disabled" data-ng-href="" title="Ir a Virtual Reality" target="_blank">
+        
+                            <span data-ng-if="app.type === 'image'" class="ng-scope">
+                                    <img src="img/appSelector/virtual_reality.svg" class="svg icon">
+                                <div class="label">Virtual Reality</div>
+                            </span> 
+                            
+                        </a>
+                    </li>   <li class="disabled" data-ng-repeat="app in appSelector.apps" data-ng-click="appSelector.selectApp(app.url)" data-ng-class="{'hide': app.project == '3237'}">
+                        <a class="disabled" data-ng-href="" title="Ir a Augmented Reality" target="_blank">
+                              
+                            <span data-ng-if="app.type === 'image'" class="ng-scope">
+                                <img src="img/appSelector/augmented_reality.svg" class="svg icon">
+                                <div class="label">Augmented Reality</div>
+                            </span> 
+                            
+                        </a>
+                    </li>   
+                </ul>
+            </div>
+</div>
+
+</body>
+<!-- <script src="js/loadPages.js"></script>
+<script src="js/scripts.js"></script>
+<script src="js/route.js"></script> -->
+<script>
+//////////////////////////////////////////////* */
+//  layer0
+//////////////////////////////////////////////* */
+
+    $(function() {
+        $.contextMenu({
+            selector: '.nav', 
+            callback: function(key, options) {
+                if(key=="open"){
+                    $( "main" ).load( "http://"+ window.location.host+"/newadmira-music/route/player-list/player-list.html");
+                }
+                if(key=="create"){
+                   
+                }
+            },
+            items: {
+                "open": {name: "open"},
+                "create": {name: "create"}, 
+            }
+        });
+    });
+
+    var connectSlider = document.getElementById('selector');
+noUiSlider.create(connectSlider, {
+    start: [0],
+    connect: [true, false],
+    step: 1,
+    orientation: 'vertical',
+    direction: 'rtl',
+    range: {
+        'min': [1],
+        'max': [3]
+    },
+    pips: {
+        mode: 'count', 
+        values: 3,
+    }
+});
+document.getElementById('selector').addEventListener('click', function () {
+        var slider = document.getElementById('selector');
+        var layer = (slider.noUiSlider.get());
+        var layerstate = parseInt(layer);
+        console.log(layerstate);  
+    });
+   
+        if (layerstate == 1){
+                document.getElementByClass('n1').addClass('visible');
+        }
+        if (layerstate == 2){
+                document.getElementByClass('n1').addClass('visible');
+            }
+        if (layerstate == 3){
+                document.getElementByClass('n2').addClass('visible');
+            }
+        
+     
+
+
+</script>
+
+<script>
+var X = 26, Y = 26;// draw width and height
+var W = 20, H = 20;// pixel width and height
+var A = [];//main data array 
+var selectedFrame = 0;
+
+var canvas0 = $('.n0 canvas.grid');
+var canvas1 = $('.n1 canvas.grid');
+var canvas2 = $('.n2 canvas.grid');
+
+var ctx = canvas0[0].getContext('2d');
+var ctx = canvas1[0].getContext('2d');
+var ctx = canvas2[0].getContext('2d');
+
+var shadow0 = $('.n0 div.draw');
+var shadow1 = $('.n1 div.draw');
+var shadow2 = $('.n2 div.draw');
+
+var out = $('style.css');
+var blur = 1;
+var offset = 0;
+var opacity = 100;
+var colorwheel = $('.colorwheel');
+var cw = Raphael.colorwheel(colorwheel[0], 525, 256);
+var pickColor = false;
+var colorInput = $('input.color');
+var loop = true;
+var play = false;
+var exportdata = $('.export');
+
+//////////////////////////////////////////////* */
+//  layer0
+//////////////////////////////////////////////* */
+
+reset();
+cw.input(colorInput[0]);
+shadow0.click(drawShadow0);
+shadow0.mousemove(drawShadow0);
+
+shadow1.click(drawShadow1);
+shadow1.mousemove(drawShadow1);
+
+shadow2.click(drawShadow2);
+shadow2.mousemove(drawShadow2);
+
+$('.reset').click(function () {  reset(); });
+colorInput.click(color);
+
+function drawShadow0 (E) {
+  var o = offset;
+  var op = opacity;
+  var c = cw.color();
+  if (o < -W/2) {o = -W/2; offset;}
+  if (op < 0) {op = 0; }
+  if (op > 100) {op = 100; }
+  var x = parseInt(E.offsetX/W), y = parseInt(E.offsetY/H);
+  if (pickColor || (E.altKey && E.type == 'click') ) {
+      cw.color(A[selectedFrame][x][y].c);
+  } else if (E.type == 'click' || 
+      (E.type == 'mousemove' && E.shiftKey) ) {
+    var erase = E.ctrlKey;
+    A[selectedFrame][x][y].a = !erase;
+    if (!erase) {
+      A[selectedFrame][x][y].b = Math.abs(blur);
+      A[selectedFrame][x][y].o = Number(o);
+      A[selectedFrame][x][y].c = 'rgba(' + Math.round(c.r) +','+ Math.round(c.g) +','+ Math.round(c.b) +','+Number(op/100)+')';
+      ctx.strokeStyle = '#666';
+    } else {
+      ctx.strokeStyle = '#eee';
+    }
+    ctx.strokeRect(x*W,y*H,W,H);
+  }
+  shadowToString();
+}
+
+function drawShadow1 (E) {
+  var o = offset;
+  var op = opacity;
+  var c = cw.color();
+  if (o < -W/2) {o = -W/2; offset;}
+  if (op < 0) {op = 0; }
+  if (op > 100) {op = 100;}
+  var x = parseInt(E.offsetX/W), y = parseInt(E.offsetY/H);
+  if (pickColor || (E.altKey && E.type == 'click') ) {
+      cw.color(A[selectedFrame][x][y].c);
+  } else if (E.type == 'click' || 
+      (E.type == 'mousemove' && E.shiftKey) ) {
+    var erase = E.ctrlKey;
+    A[selectedFrame][x][y].a = !erase;
+    if (!erase) {
+      A[selectedFrame][x][y].b = Math.abs(blur);
+      A[selectedFrame][x][y].o = Number(o);
+      A[selectedFrame][x][y].c = 'rgba(' + Math.round(c.r) +','+ Math.round(c.g) +','+ Math.round(c.b) +','+Number(op/100)+')';
+      ctx.strokeStyle = '#666';
+    } else {
+      ctx.strokeStyle = '#eee';
+    }
+    ctx.strokeRect(x*W,y*H,W,H);
+  }
+  shadowToString();
+}
+
+function drawShadow2 (E) {
+  var o = offset.val();
+  var op = opacity;
+  var c = cw.color();
+  if (o < -W/2) {o = -W/2; offset.val(o);}
+  if (op < 0) {op = 0; }
+  if (op > 100) {op = 100;}
+  var x = parseInt(E.offsetX/W), y = parseInt(E.offsetY/H);
+  if (pickColor || (E.altKey && E.type == 'click') ) {
+      cw.color(A[selectedFrame][x][y].c);
+  } else if (E.type == 'click' || 
+      (E.type == 'mousemove' && E.shiftKey) ) {
+    var erase = E.ctrlKey;
+    A[selectedFrame][x][y].a = !erase;
+    if (!erase) {
+      A[selectedFrame][x][y].b = Math.abs(blur);
+      A[selectedFrame][x][y].o = Number(o);
+      A[selectedFrame][x][y].c = 'rgba(' + Math.round(c.r) +','+ Math.round(c.g) +','+ Math.round(c.b) +','+Number(op/100)+')';
+      ctx.strokeStyle = '#666';
+    } else {
+      ctx.strokeStyle = '#eee';
+    }
+    ctx.strokeRect(x*W,y*H,W,H);
+  }
+  shadowToString();
+}
+
+
+function shadowToString () {
+  var drawcss = '.draw { width: '+ (X*W)  + 'px; height: '+ (Y*H) +'px}'; 
+  var cssShadows = [];
+  var drawaftercss = '.draw:after { width: '+W+'px; height: '+H+'px; content: ""; display: block; transform: translate(-20px, -20px)';
+  var cssContent = '';
+  if (A.length == 1 || !play) {
+    xyLoop(0, function (x,y) { 
+      var s = A[selectedFrame][x][y];
+      if (s.a) cssShadows.push(' '+(W+s.x*W)+'px '+(H+s.y*H)+'px '+s.b+'px '+s.o+'px '+s.c);    
+    });
+    if (cssShadows.length) drawaftercss += '; box-shadow: ';
+    cssContent = drawcss + drawaftercss + cssShadows.join(', ') + ' }';
+  } else {
+    drawaftercss += '; animation: 2s shadowAnimation infinite } ';
+    var animationcss = ' @keyframes shadowAnimation { ';
+    for (var f=0; f<A.length; f++) {
+      cssShadows[f] = [];
+      xyLoop(0, function (x,y) { 
+        var s = A[f][x][y];
+        if (s.a) cssShadows[f].push(' '+(W+s.x*W)+'px '+(H+s.y*H)+'px '+s.b+'px '+s.o+'px '+s.c);    
+      });
+    }
+    for (f=0; f<cssShadows.length; f++) {
+      var p = $('.frame').eq(f).children('.percent').val();
+      var q = 'none';
+      if (cssShadows[f].length) q = cssShadows[f].join(', ');
+      if (p == 0 && loop) p += '%, 100';
+      animationcss += ' ' + p + '% { box-shadow: '+ q +' } '
+    }
+    cssContent = drawcss + drawaftercss + animationcss + ' } ';
+  }
+  var data = {html: '<div class="draw"></div>', css: cssContent};
+  var exportstring = JSON.stringify(data).replace(/"/g, "&quot;").replace(/'/g, "&apos;");
+  exportdata.val(exportstring);
+  out.text(cssContent);
+}
+
+function reset () {
+  out.css('top', (30+Y*H)+'px');
+  A = [[]];
+  canvas0[0].width = X*W +1;
+  canvas0[0].height = Y*H +1;
+
+  canvas1[0].width = X*W +1;
+  canvas1[0].height = Y*H +1;
+
+  canvas2[0].width = X*W +1;
+  canvas2[0].height = Y*H +1;
+  ctx.strokeStyle = '#535353';
+  xyLoop(
+    function () { A[0].push([]); },
+    function (x,y) { 
+      build(0,x,y);
+      ctx.strokeRect(x*W + .5,y*H + .5,W,H);
+  });
+  ctx.strokeStyle = 'grey';
+  selectedFrame = 0;
+  shadowToString();
+}
+
+function xyLoop (cb1, cb2) {  
+  for (var x=0; x<X; x++) {
+    if (cb1) cb1(x)
+    for (var y=0; y<Y; y++) {
+      if (cb2) cb2(x,y)
+    }
+  }
+}
+
+function build (frame,x,y) {
+  A[frame][x].push({a: false, b: 0, x: x, y: y, b: 0, o: 0, c: '#000000'});
+}
+
+function remove () {
+  var t = $(this);
+  if (!t.attr('disabled')) {
+    var p = t.parent();
+    if (p.hasClass('selected')){
+      p.removeClass('selected');
+      $('.frame').first().addClass('selected');
+      selectedFrame = 0;
+    }
+    A.splice( p.index() - 1, 1 );
+    p.remove();
+  }
+  shadowToString();
+  return false;
+}
+
+</script>
+
+
+
+
+
+</html>

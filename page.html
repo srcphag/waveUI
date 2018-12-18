@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i" rel="stylesheet">
+            
+    <script src="js/modernizr.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.28.2/dist/sweetalert2.all.min.js"></script>
+    <script src="js/jQuery.tagify.js"></script>
+    <script src="js/nouislider.js"></script>
+    <script src="js/jquery.selectric.js"></script>
+    <script src="js/tippy.min.js"></script>
+    <script src="https://swisnl.github.io/jQuery-contextMenu/dist/jquery.contextMenu.js" type="text/javascript"></script>
+    <script src="https://swisnl.github.io/jQuery-contextMenu/dist/jquery.ui.position.min.js" type="text/javascript"></script>
+    <script src="https://swisnl.github.io/jQuery-contextMenu/js/main.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js'></script>
+    <script src="js/jquery.ui.touch-punch.min.js" type="text/javascript"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+</head>
+<body id="index">
+<div id="ohsnap"></div>
+<div class="grid-container">
+<!-- //////////////////////////////////////////////
+ //  header
+////////////////////////////////////////////// -->  
+    <header>
+        <div class="logo">
+            <span id="launcher"></span>
+            <span id="menu"></span>
+            <div class="img"></div>
+            <div class="dropdown player"><span>Get Player</span>
+                <ul>
+                    <li id="windows"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNSAyNS4wNzciPjxkZWZzPjxzdHlsZT4uYXtmaWxsOiNmZmY7fTwvc3R5bGU+PC9kZWZzPjxwYXRoIGNsYXNzPSJhIiBkPSJNMCwzLjU1MSwxMC4yMTcsMi4xNTlsMCw5Ljg1NUwuMDA5LDEyLjA3MlptMTAuMjEyLDkuNi4wMDgsOS44NjNMLjAwOCwyMS42MDlWMTMuMDgzWk0xMS40NSwxLjk3NywyNSwwVjExLjg4OUwxMS40NSwxMlpNMjUsMTMuMjQybDAsMTEuODM1TDExLjQ1LDIzLjE2NWwtLjAxOS05Ljk0NVoiLz48L3N2Zz4=">Windows</li>
+                    <li id="apple"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNSAyOS42OCI+PGRlZnM+PHN0eWxlPi5he2ZpbGw6I2ZmZjt9PC9zdHlsZT48L2RlZnM+PHBhdGggY2xhc3M9ImEiIGQ9Ik00MS4yNDYsMjcuMTI5QTE2LjEzNiwxNi4xMzYsMCwwLDEsMzkuNjUsMzBhMTQuNTc3LDE0LjU3NywwLDAsMS0yLjA1NiwyLjQ4NCwzLjk4NywzLjk4NywwLDAsMS0yLjY0MiwxLjE2Myw2LjYyMSw2LjYyMSwwLDAsMS0yLjQ0LS41ODMsNyw3LDAsMCwwLTIuNjI3LS41ODEsNy4yNCw3LjI0LDAsMCwwLTIuNy41ODEsNy4yNjksNy4yNjksMCwwLDEtMi4zMzQuNjE0LDMuNzU0LDMuNzU0LDAsMCwxLTIuNy0xLjE5NEExNS4zMDYsMTUuMzA2LDAsMCwxLDIwLDI5LjkxYTE3Ljc4OSwxNy43ODksMCwwLDEtMi4yNzQtNC41MTYsMTYuNTM2LDE2LjUzNiwwLDAsMS0uOTU1LTUuMzgyLDkuODI5LDkuODI5LDAsMCwxLDEuMjkxLTUuMTQyLDcuNTcxLDcuNTcxLDAsMCwxLDIuNy0yLjczNEE3LjI3Miw3LjI3MiwwLDAsMSwyNC40MTgsMTEuMWE4LjYwNSw4LjYwNSwwLDAsMSwyLjgyNy42NTgsOS4wODcsOS4wODcsMCwwLDAsMi4yNDIuNjU5LDEzLjQxNiwxMy40MTYsMCwwLDAsMi40ODYtLjc3Nyw4LjIxOCw4LjIxOCwwLDAsMSwzLjM3OS0uNkE3LjE3NSw3LjE3NSwwLDAsMSw0MC45NzMsMTRhNi4yNTIsNi4yNTIsMCwwLDAtMy4zMTYsNS42OEE2LjI2Niw2LjI2NiwwLDAsMCwzOS43MTQsMjQuNGE2Ljc2MSw2Ljc2MSwwLDAsMCwyLjA1NiwxLjM0OHEtLjI0Ny43MTctLjUyNCwxLjM3NlpNMzUuNTE5LDQuNTkzQTYuMzMyLDYuMzMyLDAsMCwxLDMzLjksOC43NDYsNS41Myw1LjUzLDAsMCwxLDI5LjMsMTEuMDEzYTQuNjIsNC42MiwwLDAsMS0uMDM0LS41NjIsNi41MDUsNi41MDUsMCwwLDEsMS43MjItNC4yLDYuNjMsNi42MywwLDAsMSwyLjEtMS41NzUsNi4yNTUsNi4yNTUsMCwwLDEsMi40LS42OCw1LjM5MSw1LjM5MSwwLDAsMSwuMDMxLjU5NFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xNi43NyAtMy45OTkpIi8+PC9zdmc+">Mac</li>
+                    <li id="ubuntu"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACkAAAArCAYAAADlqKH9AAAACXBIWXMAAAsSAAALEgHS3X78AAACvUlEQVRYhc1Z7Y3bMAzlFfnfbFBtcN6g7gYewSNkg2YEb9B0g3QDj+AN6k5QZwIdVJB3jEzqKxLSBxBILJt6ocgnynmx1sJ/gB4pLACw7eg4kk+00Vq72XucfT7PJNhbHXdEPz1xpU+BsZF/OTQkcQSAjn2fhXENX1qRdIQGLIKvyj03JDtkea6QW8ZaOwfyS0KHeafhUqtwDJr7nEtyxucuwthirT3WIDmgdNBkoUqNRcvJ0ITfR59gKcnRm8wR1qISw4L+DJIbMBXu5szdcZw0/PCu/cGicdX6mxXIwiqaKl0rKA73rLnbeTIi2Am7A4HEd8Cl13wcMXJrQoSLlnsJOF0L0uYUIXrOJRlyuKvGSquzkXqkOtMcPUKQLKQMl1SSfjVz7Cqx0DRhd8E5pji9Kg52LdWDphXT6HdBHe69PWsAjCIVU452JeCs3NJzafAjtrEdwM/Ja+UoEgcJC90wBfKuF/Ky9lKTiTJHO05o2/mJDepfdu2b0B/WwOT1oP9wYIcgDUY8HLWB2K0fcI8NYYt00TUxioWKuRDqBwchJ0+NclLkwStLStoJx3wNa1HdoARppTPOhgnLw33FVFj8gxHT0Zq5OirXl+IlaCBD2jynlIe1Dmir0FyQDcocDibFgbTjEOYKBEPtWnIXBDnHz0wzkWa6yyEZiqZDSUT7iM/3H18rb8hhl5CnJuFkuXI/uadF10599665012HcrQCwGcA+MXki+TNoHS9Rua44X0fO2HBMvlRICkKdVIaNnyuRztL3X5pwlMh0SnRFBCccUkNypxI8BGSlPjkVDtiaKADnBT93Zb7qMZRFENVKmGIFOJUmyRJ1JgYUUqRUOe1cf+t/n2gd0MGjbr4FQ3wWujd0At9aPU6OtZIx3Dj4898sX9JHquUk6UmVTdJU/OczAH9IeBAjfYHAOANwbpLEpBSu3EAAAAASUVORK5CYII=">Ubuntu</li>
+                    <li id="android"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNSAyOS41NDYiPjxkZWZzPjxzdHlsZT4uYXtmaWxsOiNmZmY7fTwvc3R5bGU+PC9kZWZzPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC00Mi41NDQgMCkiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQyLjU0NCAwKSI+PHBhdGggY2xhc3M9ImEiIGQ9Ik00NC4zNzMsMTc5LjE0MWExLjc2NCwxLjc2NCwwLDAsMC0xLjMuNTMzLDEuNzQzLDEuNzQzLDAsMCwwLS41MzMsMS4yNzh2Ny42MzVhMS44MTksMS44MTksMCwwLDAsMS44MjksMS44MjksMS43MzcsMS43MzcsMCwwLDAsMS4yODgtLjUzMywxLjc4LDEuNzgsMCwwLDAsLjUyNC0xLjN2LTcuNjM1YTEuODE4LDEuODE4LDAsMCwwLTEuODExLTEuODExWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTQyLjU0NCAtMTY5LjU3MSkiLz48cGF0aCBjbGFzcz0iYSIgZD0iTTEzNC45LDIuNzE3LDEzNi4xNjMuMzkxYS4yMzQuMjM0LDAsMCwwLS4wODktLjM1NS4yNDYuMjQ2LDAsMCwwLS4zNTUuMTA2bC0xLjI3OCwyLjM0NGE4LjkwNiw4LjkwNiwwLDAsMC03LjEzOCwwTDEyNi4wMjQuMTQyYS4yNDYuMjQ2LDAsMCwwLS4zNTUtLjEwNi4yMzMuMjMzLDAsMCwwLS4wODkuMzU1bDEuMjYxLDIuMzI2YTcuNzg1LDcuNzg1LDAsMCwwLTMuMDU0LDIuNzI2LDYuODg0LDYuODg0LDAsMCwwLTEuMTM2LDMuODI3aDE2LjQyNGE2Ljg4Niw2Ljg4NiwwLDAsMC0xLjEzNi0zLjgyN0E3LjgxOCw3LjgxOCwwLDAsMCwxMzQuOSwyLjcxN1pNMTI3LjYxMyw2LjFhLjY2Ni42NjYsMCwwLDEtLjQ4OC4yLjYzNS42MzUsMCwwLDEtLjQ3OS0uMi43MDguNzA4LDAsMCwxLDAtLjk3Ni42MzguNjM4LDAsMCwxLC40NzktLjIuNjkuNjksMCwwLDEsLjQ4OCwxLjE4Wm03LjQ4NCwwYS42MzcuNjM3LDAsMCwxLS40NzkuMi42OTIuNjkyLDAsMCwxLDAtMS4zODUuNjM4LjYzOCwwLDAsMSwuNDc5LjIuNzA4LjcwOCwwLDAsMSwwLC45NzZaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTE4LjM3MSAwKSIvPjxwYXRoIGNsYXNzPSJhIiBkPSJNMTIzLjk3MSwxOTcuMjc1YTEuOTM5LDEuOTM5LDAsMCwwLDEuOTUzLDEuOTUzaDEuMzE0bC4wMTgsNC4wMzFhMS43NjUsMS43NjUsMCwwLDAsLjUzMywxLjMsMS43NDQsMS43NDQsMCwwLDAsMS4yNzguNTMzLDEuODE5LDEuODE5LDAsMCwwLDEuODI5LTEuODI5di00LjAzMWgyLjQ1djQuMDMxYTEuODI5LDEuODI5LDAsMSwwLDMuNjU3LDB2LTQuMDMxaDEuMzMyYTEuOTM5LDEuOTM5LDAsMCwwLDEuOTM1LTEuOTUzVjE4NS40NWgtMTYuM1oiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMTkuNjIxIC0xNzUuNTQzKSIvPjxwYXRoIGNsYXNzPSJhIiBkPSJNNDQ0LjE4NywxNzkuMTQxYTEuNzU5LDEuNzU5LDAsMCwwLTEuMjc4LjUyNCwxLjczNiwxLjczNiwwLDAsMC0uNTMzLDEuMjg3djcuNjM1YTEuNzYzLDEuNzYzLDAsMCwwLC41MzMsMS4zLDEuNzQ0LDEuNzQ0LDAsMCwwLDEuMjc4LjUzMywxLjgxOSwxLjgxOSwwLDAsMCwxLjgyOS0xLjgyOXYtNy42MzVhMS43MzYsMS43MzYsMCwwLDAtLjUzMy0xLjI4N0ExLjc4MSwxLjc4MSwwLDAsMCw0NDQuMTg3LDE3OS4xNDFaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNDIxLjAxNiAtMTY5LjU3MSkiLz48L2c+PC9nPjwvc3ZnPg==">Android</li>
+                    <li id="android_html5"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNSAyOS41NDYiPjxkZWZzPjxzdHlsZT4uYXtmaWxsOiNmZmY7fTwvc3R5bGU+PC9kZWZzPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC00Mi41NDQgMCkiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQyLjU0NCAwKSI+PHBhdGggY2xhc3M9ImEiIGQ9Ik00NC4zNzMsMTc5LjE0MWExLjc2NCwxLjc2NCwwLDAsMC0xLjMuNTMzLDEuNzQzLDEuNzQzLDAsMCwwLS41MzMsMS4yNzh2Ny42MzVhMS44MTksMS44MTksMCwwLDAsMS44MjksMS44MjksMS43MzcsMS43MzcsMCwwLDAsMS4yODgtLjUzMywxLjc4LDEuNzgsMCwwLDAsLjUyNC0xLjN2LTcuNjM1YTEuODE4LDEuODE4LDAsMCwwLTEuODExLTEuODExWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTQyLjU0NCAtMTY5LjU3MSkiLz48cGF0aCBjbGFzcz0iYSIgZD0iTTEzNC45LDIuNzE3LDEzNi4xNjMuMzkxYS4yMzQuMjM0LDAsMCwwLS4wODktLjM1NS4yNDYuMjQ2LDAsMCwwLS4zNTUuMTA2bC0xLjI3OCwyLjM0NGE4LjkwNiw4LjkwNiwwLDAsMC03LjEzOCwwTDEyNi4wMjQuMTQyYS4yNDYuMjQ2LDAsMCwwLS4zNTUtLjEwNi4yMzMuMjMzLDAsMCwwLS4wODkuMzU1bDEuMjYxLDIuMzI2YTcuNzg1LDcuNzg1LDAsMCwwLTMuMDU0LDIuNzI2LDYuODg0LDYuODg0LDAsMCwwLTEuMTM2LDMuODI3aDE2LjQyNGE2Ljg4Niw2Ljg4NiwwLDAsMC0xLjEzNi0zLjgyN0E3LjgxOCw3LjgxOCwwLDAsMCwxMzQuOSwyLjcxN1pNMTI3LjYxMyw2LjFhLjY2Ni42NjYsMCwwLDEtLjQ4OC4yLjYzNS42MzUsMCwwLDEtLjQ3OS0uMi43MDguNzA4LDAsMCwxLDAtLjk3Ni42MzguNjM4LDAsMCwxLC40NzktLjIuNjkuNjksMCwwLDEsLjQ4OCwxLjE4Wm03LjQ4NCwwYS42MzcuNjM3LDAsMCwxLS40NzkuMi42OTIuNjkyLDAsMCwxLDAtMS4zODUuNjM4LjYzOCwwLDAsMSwuNDc5LjIuNzA4LjcwOCwwLDAsMSwwLC45NzZaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTE4LjM3MSAwKSIvPjxwYXRoIGNsYXNzPSJhIiBkPSJNMTIzLjk3MSwxOTcuMjc1YTEuOTM5LDEuOTM5LDAsMCwwLDEuOTUzLDEuOTUzaDEuMzE0bC4wMTgsNC4wMzFhMS43NjUsMS43NjUsMCwwLDAsLjUzMywxLjMsMS43NDQsMS43NDQsMCwwLDAsMS4yNzguNTMzLDEuODE5LDEuODE5LDAsMCwwLDEuODI5LTEuODI5di00LjAzMWgyLjQ1djQuMDMxYTEuODI5LDEuODI5LDAsMSwwLDMuNjU3LDB2LTQuMDMxaDEuMzMyYTEuOTM5LDEuOTM5LDAsMCwwLDEuOTM1LTEuOTUzVjE4NS40NWgtMTYuM1oiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMTkuNjIxIC0xNzUuNTQzKSIvPjxwYXRoIGNsYXNzPSJhIiBkPSJNNDQ0LjE4NywxNzkuMTQxYTEuNzU5LDEuNzU5LDAsMCwwLTEuMjc4LjUyNCwxLjczNiwxLjczNiwwLDAsMC0uNTMzLDEuMjg3djcuNjM1YTEuNzYzLDEuNzYzLDAsMCwwLC41MzMsMS4zLDEuNzQ0LDEuNzQ0LDAsMCwwLDEuMjc4LjUzMywxLjgxOSwxLjgxOSwwLDAsMCwxLjgyOS0xLjgyOXYtNy42MzVhMS43MzYsMS43MzYsMCwwLDAtLjUzMy0xLjI4N0ExLjc4MSwxLjc4MSwwLDAsMCw0NDQuMTg3LDE3OS4xNDFaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNDIxLjAxNiAtMTY5LjU3MSkiLz48L2c+PC9nPjwvc3ZnPg==">Android HTML5</li>
+                    <li id="ios"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMSAxNS4zODEiPjxkZWZzPjxzdHlsZT4uYXtmaWxsOiNmZmY7fTwvc3R5bGU+PC9kZWZzPjxwYXRoIGNsYXNzPSJhIiBkPSJNLjgxNiwxNS43MTJIMy4zOFY0LjhILjgxNlYxNS43MTJaTTIuMDkzLDMuMzY4YTEuNCwxLjQsMCwxLDAsMC0yLjc5LDEuNCwxLjQsMCwxLDAsMCwyLjc5Wk0xMS45MTUuNjA5Yy00LjMzNCwwLTcuMDUyLDIuOTU1LTcuMDUyLDcuNjhzMi43MTgsNy42Nyw3LjA1Miw3LjY3LDcuMDQyLTIuOTQ0LDcuMDQyLTcuNjdTMTYuMjM5LjYwOSwxMS45MTUuNjA5Wm0wLDIuMjY1YzIuNjQ2LDAsNC4zMzQsMi4xLDQuMzM0LDUuNDE1cy0xLjY4OCw1LjQwNS00LjMzNCw1LjQwNS00LjMzNC0yLjEtNC4zMzQtNS40MDUsMS42NzgtNS40MTUsNC4zMzQtNS40MTVabTguMTIzLDguNjU4Yy4xMTMsMi43MzksMi4zNTgsNC40MjcsNS43NzYsNC40MjcsMy41OTMsMCw1Ljg1OC0xLjc3MSw1Ljg1OC00LjU5MiwwLTIuMjEzLTEuMjc3LTMuNDU5LTQuMjkzLTQuMTQ5TDI1LjY3LDYuODI3QzIzLjg0OCw2LjQsMjMuMSw1LjgxOCwyMy4xLDQuODNjMC0xLjIzNSwxLjEzMi0yLjA1OSwyLjgxMS0yLjA1OSwxLjcsMCwyLjg2Mi44MzQsMi45ODYsMi4yMjRoMi41MzNDMzEuMzYzLDIuMzgsMjkuMi42MDksMjUuOTI3LjYwOSwyMi42OTQuNjA5LDIwLjQsMi4zOSwyMC40LDUuMDI2YzAsMi4xMjEsMS4zLDMuNDM5LDQuMDM2LDQuMDY3bDEuOTI1LjQ1M0MyOC4yMzMsOS45ODgsMjksMTAuNjA2LDI5LDExLjY3N2MwLDEuMjM1LTEuMjQ2LDIuMTIxLTMuMDM3LDIuMTIxLTEuODEyLDAtMy4xODEtLjktMy4zNDYtMi4yNjVIMjAuMDM4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNjcyIC0wLjU3OCkiLz48L3N2Zz4=">IOS</li>
+                </ul>
+            </div>
+        </div> 
+        <div class="tools">
+            <input placeholder="Search item"/>
+            <button></button>
+            <div class="dropdown language"><span>EN</span>
+                <ul>
+                    <li>CA</li> 
+                    <li>ES</li>
+                    <li>FR</li>
+                    <li>PT</li> 
+                </ul>
+            </div>
+            <div class="dropdown user">
+                <span>
+                    <div class="notification">26</div>
+                </span>
+                    <ul>
+                        <li>User</li>
+                        <li>Notifications</li>
+                        <li>Logout</li>
+                    </ul>
+            </div>
+        </div>   
+    </header>
+    <div id="body">
+<!-- //////////////////////////////////////////////
+ //  nav
+////////////////////////////////////////////// -->
+        <nav id="nav">
+            <div class="wrapper">
+                <div class="navigator" data-tippy-content="Tooltip A">
+                    <h2 id="infoPag">Navigator</h2>
+                </div>
+                <ul>
+                    <a href="#" class="tip" title="Configure your buildings"><li class="events nav">Events</li></a>
+                    <a href="#" class="tip" title="manage your events"><li class="buildings nav">Buildings</li></a>
+                </ul>
+            </div>
+            <div class="close"></div>
+        </nav>
+<!-- //////////////////////////////////////////////
+ //  source area
+////////////////////////////////////////////// -->
+        <div id="work">
+                <div id="source_area">
+                        <ul class="tabs">
+                                <li><button class="tablink active">Selector</button></li>
+                                <!-- <li><button class="tablink">schedules</button></li> -->
+                            </ul>
+                           <div id="filter">
+                                <ul>
+                                    <li class="index">Name</li>
+                                </ul>
+                           </div>
+                            <div id="albums" class="source">
+                                <div class="accordion album">
+                                        <ul class="contextSourceSchedule tip 1level" title="Schedule example" style="background-color:#f0f0f0;">
+                                            <div></div>
+                                            <hl>Source item 1</hl>
+                                        </ul>
+                                            <ol class="accordion-content 2level" data-id="5438" style="display: block;">
+                                                <li><span>Level 1</span></li>
+                                                    <ol class="level3">
+                                                        <li><div class="status open"></div><span>Room 1</span></li>
+                                                        <li><div class="status closed"></div><span>Room 2</span></li>
+                                                        <li><div class="status"></div><span>Room 3</span></li>
+                                                    </ol>
+                                                <li><span>Level 2</span></li>
+                                                <li><span>Level 3</span></li>
+                                            </ol>
+                                        <ul class="contextSourceSchedule tip">
+                                            <div></div>
+                                            <hl>Source item 2</hl>
+                                        </ul>
+                                        <ul class="contextSourceSchedule tip">
+                                            <div></div>
+                                            <hl>Source item 3</hl>
+                                        </ul>
+                                        <ul class="contextSourceSchedule tip">
+                                            <div></div>
+                                            <hl>Source item 4</hl>
+                                        </ul>
+                                        <ul class="contextSourceSchedule tip">
+                                            <div></div>
+                                            <hl>Source item 5</hl>
+                                        </ul>
+                                        <ul class="contextSourceSchedule tip">
+                                            <div></div>
+                                            <hl>Source item 6</hl>
+                                        </ul>
+                                    </div>
+                            </div>
+                            <div id="schedules" class="source" style="display:none">
+                                <div class="accordion schedule">
+                                    <ul class="contextSourceSchedule tip" title="Schedule example">
+                                        <div></div>
+                                        <hl>Source item 1</hl>
+                                    </ul>
+                                    <ul class="contextSourceSchedule tip">
+                                        <div></div>
+                                        <hl>Source item 2</hl>
+                                    </ul>
+                                    <ul class="contextSourceSchedule tip">
+                                        <div></div>
+                                        <hl>Source item 3</hl>
+                                    </ul>
+                                    <ul class="contextSourceSchedule tip">
+                                        <div></div>
+                                        <hl>Source item 4</hl>
+                                    </ul>
+                                    <ul class="contextSourceSchedule tip">
+                                        <div></div>
+                                        <hl>Source item 5</hl>
+                                    </ul>
+                                    <ul class="contextSourceSchedule tip">
+                                        <div></div>
+                                        <hl>Source item 6</hl>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                </div>     
+ <!-- //////////////////////////////////////////////
+ //  main
+////////////////////////////////////////////// -->           
+            <main>
+                <div id="player-page">
+                    <div class="main_head clean">
+                        <div class="wrapper">
+                                <div class="title"> 
+                                    <h1>Element Title</h1>
+                                    <h2>Subtitle</h2>
+                                </div>
+                                <div class="buttons">
+                                    <button class="edit"></button>
+                                </div>
+                        </div> 
+                    </div>
+            <div>
+                <div class="player_body">
+                        <div class="content">
+                                <div class="thumbnail">
+                                        <div class="unassigned dropzone">
+                                            <h4></h4>
+                                            <div class="close"></div>
+                                        </div>
+                                        <ul>
+                                            <li><span>Schedule</span></li>
+                                            <li>Not assign</li>
+                                        </ul>
+                                    </div>
+                                    <div class="info">
+                                        <h3>Information</h3>
+                                        <ul>
+                                            <li><span>Awesome things:</span>Data1</li>
+                                            <li><span>Awesome things:</span>Data2</li>
+                                            <li><span>Awesome things:</span>Data3</li>
+                                            <li><span>More Awesome things:</span>Data4</li>
+                                            <li><span>Download log:</span>20/214</li>
+                                            <li><span>Last update:</span>14 min</li>
+                                            <li><span>More API info:</span>256</li>
+                                            <p></p>
+        
+                                        <h3>Manage</h3>
+                                            <li> 
+                                                <button class="trig""></button>
+                                                <label for="modalcheck_1">Send reboot</label>
+                                            </li>
+                                            <li>
+                                                <button class="trig"></button>  
+                                                <label for="modalcheck_2">Froce refresh</label>
+                                            </li>
+                                        </ul>
+                                        <!-- <img onclick="galery()" src="data:image/jpeg;base64,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"/> -->
+                                    </div> 
+                        </div>
+                    </div>   
+            </div>  
+            </main>
+ <!-- //////////////////////////////////////////////
+ //  info_area
+////////////////////////////////////////////// -->  
+            <div id="info_area" class="showInfo">
+                    <div id="player-info" class="container opacity1">
+                            <div class="tab">  
+                                <!-- <div class="close" onclick="hideInfo()"><i class="material-icons md-18">close</i></div> -->
+                                <div class="title">
+                                    <h3>Events<span>360 Experience</span></h3>
+                                </div>
+                                <!-- <div class="close" onclick="showInfo()"></div> -->
+                            </div> 
+                            <div class="wrapper">
+                                <ul class="rowList">
+                                    <li><span>16:00 - 17:00</span>Meeting Yoo Young</li>
+                                    <li><span>16:00 - 17:00</span>Nullam eget ante bibendum</li>
+                                    <li><span>16:00 - 17:00</span>Sed fringilla</li>
+                                    <li><span>16:00 - 17:00</span>Donec pharetra venenatis</li>
+                                    <li><span>16:00 - 17:00</span>Meeting Yoo Young</li>
+                                    <li><span>16:00 - 17:00</span>Nullam eget ante bibendum</li>
+                                    <li><span>16:00 - 17:00</span>Sed fringilla</li>
+                                    <li><span>16:00 - 17:00</span>Donec pharetra venenatis</li>
+                                    <li><span>16:00 - 17:00</span>Meeting Yoo Young</li>
+                                    <li><span>16:00 - 17:00</span>Nullam eget ante bibendum</li>
+                                    <li><span>16:00 - 17:00</span>Sed fringilla</li>
+                                    <li><span>16:00 - 17:00</span>Donec pharetra venenatis</li>
+                                    <li><span>16:00 - 17:00</span>Meeting Yoo Young</li>
+                                    <li><span>16:00 - 17:00</span>Nullam eget ante bibendum</li>
+                                    <li><span>16:00 - 17:00</span>Sed fringilla</li>
+                                    <li><span>16:00 - 17:00</span>Donec pharetra venenatis</li>
+                                    <li><span>16:00 - 17:00</span>Meeting Yoo Young</li>
+                                    <li><span>16:00 - 17:00</span>Nullam eget ante bibendum</li>
+                                    <li><span>16:00 - 17:00</span>Sed fringilla</li>
+                                    <li><span>16:00 - 17:00</span>Donec pharetra venenatis</li>
+                                    <li><span>16:00 - 17:00</span>Meeting Yoo Young</li>
+                                    <li><span>16:00 - 17:00</span>Nullam eget ante bibendum</li>
+                                    <li><span>16:00 - 17:00</span>Sed fringilla</li>
+                                    <li><span>16:00 - 17:00</span>Donec pharetra venenatis</li>
+                                    <li><span>16:00 - 17:00</span>Meeting Yoo Young</li>
+                                    <li><span>16:00 - 17:00</span>Nullam eget ante bibendum</li>
+                                    <li><span>16:00 - 17:00</span>Sed fringilla</li>
+                                    <li><span>16:00 - 17:00</span>Donec pharetra venenatis</li>
+                                    <li><span>16:00 - 17:00</span>Meeting Yoo Young</li>
+                                    <li><span>16:00 - 17:00</span>Nullam eget ante bibendum</li>
+                                    <li><span>16:00 - 17:00</span>Sed fringilla</li>
+                                    <li><span>16:00 - 17:00</span>Donec pharetra venenatis</li>
+                                    <li><span>16:00 - 17:00</span>Meeting Yoo Young</li>
+                                    <li><span>16:00 - 17:00</span>Nullam eget ante bibendum</li>
+                                    <li><span>16:00 - 17:00</span>Sed fringilla</li>
+                                    <li><span>16:00 - 17:00</span>Donec pharetra venenatis</li>
+                                    <li><span>16:00 - 17:00</span>Meeting Yoo Young</li>
+                                    <li><span>16:00 - 17:00</span>Nullam eget ante bibendum</li>
+                                    <li><span>16:00 - 17:00</span>Sed fringilla</li>
+                                    <li><span>16:00 - 17:00</span>Donec pharetra venenatis</li>
+                                    <li><span>16:00 - 17:00</span>Meeting Yoo Young</li>
+                                    <li><span>16:00 - 17:00</span>Nullam eget ante bibendum</li>
+                                    <li><span>16:00 - 17:00</span>Sed fringilla</li>
+                                    <li><span>16:00 - 17:00</span>Donec pharetra venenatis</li>
+                                </ul>
+                            </div>
+                            <!-- <div class="buttons">
+                                    <button class="save">Save</button>
+                                    <button>Assign</button>
+                                    <button>Delete</button>
+                            </div>  -->
+                        </div>
+            </div>
+        </div>
+    </div>  
+ <!-- //////////////////////////////////////////////
+ //  spinner
+////////////////////////////////////////////// -->  
+    <div id="spinner">
+        <span></span>
+        <div></div>
+    </div>
+        <div></div>
+    </div>
+</div>    
+ <!-- //////////////////////////////////////////////
+ //  app-selector
+////////////////////////////////////////////// -->  
+<div class="wrapper-selector">
+    <div class="triangle"></div>
+    <div id="app-selector">
+            <!--<span class="zmdi zmdi-apps color_principal_light {{appSelector.ui.showAppSelector}}" type="button" id="app-selector" data-ng-click="appSelector.toggleAppSelector()"></span>-->
+            <ul id="admira-apps"  data-ng-show="appSelector.ui.showAppSelector">
+                <li>
+                    <a class="" data-ng-href="http://dashboard.admira.com" title="Ir a Dashboard" target="_blank" href="http://dashboard.admira.com">
+                            <img src="img/appSelector/dashboard.svg" class="svg icon">
+                            <div class="label">Dashboard</div>
+                        </span>  
+                    </a>
+                </li>   
+                <li>
+                    <a class="" data-ng-href="http://new.admira.mobi" title="Ir a Digital Signage" target="_blank" href="http://new.admira.mobi">  
+                        <span data-ng-if="app.type === 'image'" class="ng-scope">
+                            <img src="img/appSelector/digital_signage.svg" class="svg icon">
+                            <div class="label">Digital Signage</div>
+                        </span> 
+                    </a>
+                </li>   
+                <li>
+                    <a class="" data-ng-href="http://catalog.admira.com" title="Ir a Catálogo de contenidos" target="_blank" href="http://catalog.admira.com">
+                          
+                        <span data-ng-if="app.type === 'image'" class="ng-scope">
+                            <img src="img/appSelector/catalog.svg" class="svg icon">
+                            <div class="label">Catálogo de contenidos</div>
+                        </span>    
+                    </a>
+                </li>   
+                <li>
+                    <a class="" data-ng-href="http://desk.admira.com" title="Ir a Soporte" target="_blank" href="http://desk.admira.com">
+                          
+                        <span data-ng-if="app.type === 'image'" class="ng-scope">
+                            <img src="img/appSelector/soporte.svg" class="svg icon">
+                            <div class="label">Soporte</div>
+                        </span> 
+                    </a>
+                </li>   
+                <li>
+                    <a class="" data-ng-href="https://admin.sr.admira.com/" title="Ir a Gestión App" target="_blank" href="https://admin.sr.admira.com/">
+                          
+                        <span data-ng-if="app.type === 'image'" class="ng-scope">
+                            <img src="img/appSelector/push_notifications.svg" class="svg icon">
+                            <div class="label">Gestión App</div>
+                        </span>   
+                    </a>
+                </li>   
+                <li>
+                    <a class="" data-ng-href="https://onesignal.com/" title="Ir a Push Notifications" target="_blank" href="https://onesignal.com/">
+                          
+                        <span data-ng-if="app.type === 'image'" class="ng-scope">
+                            <img src="img/appSelector/push_notifications.svg" class="svg icon">
+                            <div class="label">Push Notifications</div>
+                        </span> 
+                    </a>
+                </li>   
+                <li>
+                    <a data-ng-href="" title="Ir a IoT Manager" target="_blank">
+                          
+                        <span data-ng-if="app.type === 'image'" class="ng-scope">
+                            <img src="img/appSelector/iot.svg" class="svg icon">
+                            <div class="label">IoT Manager</div>
+                        </span> 
+                    </a>
+                </li>   
+                <li>
+                    <a class="disabled" data-ng-href="" title="Ir a Video analytics" target="_blank">            
+                        <span data-ng-if="app.type === 'image'" class="ng-scope">
+                            <img src="img/appSelector/video_analytics.svg" class="svg icon">
+                            <div class="label">Video analytics</div>
+                        </span>          
+                    </a>
+                </li>  
+                <li>
+                    <a class="disabled" data-ng-href="" title="Ir a Radio analytics" target="_blank">      
+                        <span data-ng-if="app.type === 'image'" class="ng-scope">
+                            <img src="img/appSelector/radio_analytics.svg" class="svg icon">
+                            <div class="label">Radio analytics</div>
+                        </span> 
+                    </a>
+                </li>   
+                <li>
+                    <a class="disabled pointer" data-ng-href="https://meraki.cisco.com/" title="Ir a Social Wifi" target="_blank" href="https://meraki.cisco.com/">     
+                        <span data-ng-if="app.type === 'image'" class="ng-scope">
+                            <img src="img/appSelector/social_wifi.svg" class="svg icon">
+                            <div class="label">Social Wifi</div>
+                        </span>     
+                    </a>
+                </li>   
+                <li class="disabled">
+                    <a class="disabled" data-ng-href="" title="Ir a Gestor de turnos" target="_blank">      
+                        <span data-ng-if="app.type === 'image'" class="ng-scope">
+                            <img src="img/appSelector/turnos.svg" class="svg icon">
+                            <div class="label">Gestor de turnos</div>
+                        </span> 
+                    </a>
+                </li>   
+                <li class="disabled" >
+                    <a class="disabled" data-ng-href="" title="Ir a Reserva de salas" target="_blank">
+    
+                        <span data-ng-if="app.type === 'image'" class="ng-scope" class="svg icon">
+                            <img src="img/appSelector/push_notifications.svg" >
+                            <div class="label">Reserva de salas</div>
+                        </span>
+                    </a>
+                </li>
+                <li class="disabled">
+                    <a class="disabled" data-ng-href="" title="Ir a Hilo musical" target="_blank">
+    
+                        <span data-ng-if="app.type === 'image'" class="ng-scope">
+                            <img  src="img/appSelector/music.svg" class="svg icon">
+                            <div class="label">Hilo musical</div>
+                        </span>
+                    </a>
+                </li>   
+                <li class="disabled">
+                    <a class="disabled" data-ng-href="" title="Ir a Marketing sensorial" target="_blank">
+                        <span data-ng-if="app.type === 'image'" class="ng-scope">
+                            <img src="img/appSelector/marketing_sensorial.svg" class="svg icon">
+                            <div class="label">Marketing sensorial</div>
+                        </span> 
+                    </a>
+                </li>   
+                <li class="disabled">
+                    <a class="disabled" data-ng-href="" title="Ir a Virtual Reality" target="_blank">
+                        <span data-ng-if="app.type === 'image'" class="ng-scope">
+                                <img src="img/appSelector/virtual_reality.svg" class="svg icon">
+                            <div class="label">Virtual Reality</div>
+                        </span>      
+                    </a>
+                </li>   
+                <li class="disabled">
+                    <a class="disabled" data-ng-href="" title="Ir a Augmented Reality" target="_blank">
+                        <span data-ng-if="app.type === 'image'" class="ng-scope">
+                            <img src="img/appSelector/augmented_reality.svg" class="svg icon">
+                            <div class="label">Augmented Reality</div>
+                        </span> 
+                    </a>
+                </li>   
+            </ul>
+        </div>
+</div>
+
+</body>
+<script>
+    $(function() {
+        $.contextMenu({
+            selector: '.nav', 
+            callback: function(key, options) {
+                if(key=="open"){
+                    $( "main" ).load( "http://"+ window.location.host+"/newadmira-music/route/player-list/player-list.html");
+                }
+                if(key=="create"){
+                   
+                }
+            },
+            items: {
+                "open": {name: "open"},
+                "create": {name: "create"}, 
+            }
+        });
+    });
+
+//////////////////////////////////////////////
+//  app-launcher
+//////////////////////////////////////////////
+
+$( "#launcher" ).click(function() {
+    $( "#app-selector" ).toggleClass( "visible" );
+    $( ".triangle" ).toggleClass( "visible" );   
+  }
+);
+
+jQuery('img.svg').each(function(){
+    var $img = jQuery(this);
+    var imgID = $img.attr('id');
+    var imgClass = $img.attr('class');
+    var imgURL = $img.attr('src');
+
+    jQuery.get(imgURL, function(data) {
+        // Get the SVG tag, ignore the rest
+        var $svg = jQuery(data).find('svg');
+
+        // Add replaced image's ID to the new SVG
+        if(typeof imgID !== 'undefined') {
+            $svg = $svg.attr('id', imgID);
+        }
+        // Add replaced image's classes to the new SVG
+        if(typeof imgClass !== 'undefined') {
+            $svg = $svg.attr('class', imgClass+' replaced-svg');
+        }
+        $svg = $svg.removeAttr('xmlns:a');
+        // Check if the viewport is set, if the viewport is not set the SVG wont't scale.
+        if(!$svg.attr('viewBox') && $svg.attr('height') && $svg.attr('width')) {
+            $svg.attr('viewBox', '0 0 ' + $svg.attr('height') + ' ' + $svg.attr('width'))
+        }
+
+        // Replace image with new SVG
+        $img.replaceWith($svg);
+
+    }, 'xml');
+
+});
+
+//////////////////////////////////////////////
+//  list-switch
+//////////////////////////////////////////////
+
+$("body").on("click", ".showList", function(){   
+    var cat = $(this).parent().parent().data('filter'); 
+    if (cat==='players'){
+        $( "#player" ).removeClass( "grid" );
+        $( "#player" ).addClass( "list" );
+    }else if (cat==='albums'){
+        $( "#album" ).removeClass( "grid" );
+        $( "#album" ).addClass( "list" );
+    }
+    $(this).addClass('active');
+    $( ".showGrid" ).removeClass('active');
+    $( ".index" ).addClass( "active" );
+});
+ 
+$("body").on("click", ".showGrid", function(){   
+    var cat = $(this).parent().parent().data('filter');
+    if (cat==='players'){
+        $( "#player" ).removeClass( "list" );
+        $( "#player" ).addClass( "grid" );
+    }else if (cat==='albums'){
+        $( "#album" ).removeClass( "list" );
+        $( "#album" ).addClass( "grid" );
+    }
+    $(this).addClass('active');
+    $( ".showList" ).removeClass('active');  
+    $( ".index" ).removeClass( "active" );
+});
+
+//////////////////////////////////////////////
+//  modal
+//////////////////////////////////////////////
+
+function showModal(){
+    var bodyHtml = '<div class="body">'+
+                        '<div class="rowL">'+
+                            '<div class="thumbnail player"></div>'+ 
+                        '</div>'+
+                        '<div class="rowR">'+
+                            '<form>'+    
+                                '<label>Name*</label>'+
+                                '<input id="nameNewAlbum" class="typpyInput" type="text" placeholder="Awesome new album" maxlength="64" required/>'+
+
+                                '<label>Floor</label>'+
+                                '<textarea id="descrNewAlbum" class="typpyInput" placeholder="At vero eos et accusamus et iusto odio dignissimos ducimus" maxlength="128"></textarea>'+
+
+                                 '<label>Room</label>'+
+                                ' <select id="room" class="select" name="tzone">'+
+                                    '<option value="Room 1">Room 1</option>'+
+                                    '<option value="Room 2">Room 2</option>'+
+                                ' </select>'+
+                                '<label>Play mode</label>'+
+                                '<div>'+
+                                '<ul>'+
+                                    '<li>'+
+                                        '<input type="radio" name="playMode" value="0" id="random" checked></input>'+
+                                        '<label for="random">Random</label>'+
+                                    '</li>'+
+                                    '<li>'+
+                                        '<input type="radio" name="playMode" value="2" id="sequential"></input>'+
+                                        '<label for="sequential">Sequential</label>'+
+                                    '</li>'+
+                                '</ul>'+
+                                '</div>'+ 
+                            '</form>'+    
+                        '</div>'+
+                    '</div>';          
+    swal({
+        title: 'Modal title',
+        html: bodyHtml,
+        showLoaderOnConfirm: true,
+        reverseButtons: true,
+        preConfirm: ( function () {
+            
+            return fetch( APIWEB_URL+"content/"+idAlbum+"?access_token="+localStorage.getItem('access_token')+"&project_id=3514",{
+                crossDomain:true,
+                method: 'DELETE',
+                data: 'block_content_id=' + idTrack
+            }).then(response => {
+                if (!response.ok) {
+                  throw new Error(response.statusText)
+                }
+                return response.json()
+              })
+              .catch(error => {
+                swal.showValidationMessage(
+                  `Request failed: ${error}`
+                )
+              })
+          }),     
+        showCloseButton: true,
+        showCancelButton: true,
+        focusConfirm: true,
+        animation: false,
+        customClass: 'modal animation',
+        buttonsStyling: false
+    }).then( function (result) {
+        if (result.value) {
+            console.log (result.value);
+            swal({
+                position: 'top-end',
+                type: 'success',
+                title: 'Deleted!',
+                html: `The track ${result.value.data.title} has been deleted`,
+                showConfirmButton: false,
+                customClass: 'notify',
+                timer: 3000,
+                toast: true,
+                
+            })
+        }        
+    });     
+    $('select').selectric();
+}
+
+tippy('.navigator')
+</script>
+
+</html>

@@ -1,0 +1,990 @@
+@font-face {
+    font-family: admira;
+    src: url(../fonts/Admira-Font-Outline-NEW-30.ttf);
+}
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+} 
+*:focus{
+    border: 0;
+}
+*:selection{
+    background: $grey1;
+}
+a{
+    &:link{
+        color: $black;
+    }
+    &:visited{
+        color: $black;
+    }
+    &:hover{
+        color: $black;
+    }
+    &:active{
+        color: $black;
+    }
+}
+body{
+    overflow: hidden;
+    min-width: 100vw;
+    min-height: 100vh;
+    color: $black;
+}
+::-webkit-scrollbar {
+    width: 2px;
+    height: 0px;
+}
+::-webkit-scrollbar-button {
+    width: 0px;
+    height: 0px;
+}
+::-webkit-scrollbar-thumb {
+    background: $grey3;
+    border: 0px none #ffffff;
+    border-radius: 50px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: $grey3;
+}
+::-webkit-scrollbar-thumb:active {
+    background: $grey3;
+    width: 2px;
+}
+::-webkit-scrollbar-track {
+    background: #ffffff;
+    border: 0px none #ffffff;
+    border-radius: 50px;
+}
+::-webkit-scrollbar-track:hover {
+    background: #ffffff;
+}
+::-webkit-scrollbar-track:active {
+    background: white;
+}
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+#source_area ul,
+#source_area ol,
+nav ul li,
+nav ol li,
+#info_area ul,
+#info_area ol
+{
+    @extend %paddingcell
+}  
+.grid-container {
+    display: flex;
+    flex-direction: column;
+}
+#source_area,
+main{
+    transition: $main-transition;
+    &:hover{
+        ::-webkit-scrollbar{
+            width: 4px;
+        }
+    }
+
+}
+#source_area,
+#info_area,
+nav{
+    display: block;
+}
+li{
+    height: $Vcell;
+    @extend %center_cell;
+    @extend %list; 
+}
+p{
+    @extend %p; 
+}
+//////////////////////////////////////////////* */
+//  modal
+//////////////////////////////////////////////* */
+.modal{
+    margin:auto;
+    background-color:#fff;
+    position: relative;
+    padding: $Vcell/1 $Hcell / 4 ;
+    padding-bottom: $Vcell/2;
+    max-width: unset;
+    outline:0;
+    max-width:41vw;
+    width: unset;
+    flex-direction: column;
+    min-height: $Vcell * 8;
+    border-radius: $radius; 
+    z-index: 950;
+    @extend %shadow;
+    &.lite{
+        width: $Hcell*4;
+    }
+    .swal2-header{
+        align-items: flex-start;
+        .swal2-title{
+            @extend %header;
+        }
+    }
+    .swal2-validation-message{
+        margin-bottom: 20px;
+    }
+    .ui-dialog-titlebar{
+        @extend %header;  
+        display: flex;
+        font-weight: 300 !important;  
+        justify-content: space-between;
+        margin-bottom: $Vcell/4;
+        &:before{
+            margin-right: 8px; 
+        }
+    }
+    .swal2-actions{
+        margin: unset;
+        justify-content: flex-end;
+    }
+    &.animation{
+        @extend %modal;
+    }
+    .swal2-container.swal2-shown{
+        background-color: rgba(151, 151, 151, 0.4) !important;
+    }
+    span{
+        font-weight: 300;    
+    }
+    span:after{
+        content: "\00a0";
+    }
+    .body{
+        display: flex;
+        flex-direction: row;
+        padding-top: $Vcell/2;
+        .rowL, .rowR {
+            display: flex;
+            justify-content: flex-start;
+            .selectric-wrapper{
+                margin: unset;
+            }
+            form{
+                div{
+                    margin-top: 8px;
+                }
+                label{
+                    text-align: left;
+                    @extend %label;
+                }
+                &.listAlbumsAssign{
+                    width: 100%;
+                    .head{
+                        // background-color: $grey1;
+                        border-bottom: $line;
+                        width: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        height: $Vcell*1.5;
+                        border-radius: $radius;
+                        @extend %minpaddingcell;    
+                        label{
+                            margin-bottom: unset;
+                        }
+                    }
+                    .wrapper{
+                        @extend %minpaddingcell;
+                        height: $Vcell*16;
+                        overflow-x: scroll;
+                        margin-top: $Vcell/2;
+                        input[type="checkbox"]:checked + label:before {
+                            background-color: $grey3;
+                            border: solid 1px $grey3;
+                        }
+                    }
+                }
+            }
+        }
+        .rowL{
+            width: $Hcell * 2;
+            display: flex;
+            flex-direction: column;
+            form{
+                padding: unset;
+                justify-content: flex-start;
+            }
+            li{
+                display: flex;
+                justify-content: flex-start;
+                width: 100%;
+            }
+            .thumbnail{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: $Hcell*1.5;
+                height: $Hcell*1.5;
+                border-radius: $radius; 
+                margin-bottom: $Vcell;
+                h4{
+                    @extend %subheader;  
+                    margin: 0;
+                    position:absolute;
+                    color:$white;
+                }
+                &:hover,
+                &:focus{
+                    cursor: crosshair;
+                }
+                &.player{
+                    background-color: $grey2;
+
+                }
+            }
+            &.monoRow{
+                width: 100%;
+            }
+        }
+        .rowR{
+            width: $Hcell * 3;
+            form{
+                width: 100%;
+            }
+            .rowbutton {
+                margin-top: $Vcell * 2;  
+            }
+            &:nth-last-child(-n+2){
+                margin-bottom: $Vcell * 1;
+            }
+            li{
+                height: $Vcell;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+        }
+    }
+    input{
+        width: 100%;
+    }
+   
+    #modalAssignAlbum{ 
+        position: relative;
+        top: -20px;
+        
+        div.body{
+            flex-direction: column;
+            div#searchbar{
+                form{
+                    padding: unset;
+                }
+                .input{
+                    display: flex;
+                    align-items: center;
+                    width: 100%;
+                    input{
+                        height: $Vcell;
+                    }
+                }
+            }
+            .wrapper{
+                overflow: scroll;
+                height: 38vh;
+                margin-bottom: 5vh;
+                margin-top: 5px;
+                padding-top: 5px;
+                border-top: $line;
+            
+                form{
+                    padding: unset;
+                    input[type="checkbox"] {
+                        position: absolute;
+                        opacity: 0;
+                        width: 16px;
+                        left: 0px;
+                        z-index: 100;
+                        &:hover{
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+    
+        }
+
+    div#searchbar{
+        padding-left: unset;
+        height: $Vcell;
+    }
+} 
+form{
+    .selectric{
+        .button{
+            top: 8px;
+        }
+        .label{
+            display: flex;
+            font-size: 0.7em;
+        }
+    }
+}
+}
+//////////////////////////////////////////////* */
+//  buttons
+//////////////////////////////////////////////* */
+button{
+    // min-height: 40px;
+    // min-width: $Hcell / 1.5;
+    border-radius: 25px;
+    // border-radius: $radius;
+    border: 0;
+    color: $white;
+    background-color: $black;
+    font-size: 0.9em;
+    font-weight: 300;
+    padding: 8px 40px;
+    // box-shadow: $inner-shadow;
+    transition: filter 1s;
+    margin: 10px;
+
+}
+button.bottom{
+    // border-radius: $radius $radius 0 0;
+}  
+button.trig{
+    margin: 0;
+    margin-right: 5px;
+    width: 23px;
+    height: 20px;
+    transition: 0.2s;
+    border: solid 1px $grey3;
+    border-radius: 3px;
+    background-color: $grey2;
+    padding: unset;
+    min-width: unset;
+    min-height: unset;
+    box-shadow: unset;
+
+    &:focus{
+        background-color: $black;
+    }
+    &:hover{
+        filter: unset;  
+    }
+    &:active{
+        background-color: $black;
+    }
+}
+button.ui-dialog-titlebar-close{
+  background-color: unset;
+  box-shadow: unset;
+  padding: 0;
+//   min-width: 0;
+//   min-height: 0;
+    span{
+        display: none;
+    }
+        &:before{
+        content: "\002a";
+        font-family: admira;
+        color: $black;
+        font-size: 1.3em;
+  }
+}
+button:hover,
+button:focus{
+    cursor: pointer;
+    filter: contrast(130%);      
+}
+button + button{
+    margin-left: $Vcell / 4;
+}
+.ui-dialog-buttonset{
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    bottom: 0;
+    right: $Vcell / 2;
+
+    button{
+        // border-radius: 5px 5px 0 0;
+        // padding: 0  $Hcell / 8;
+
+    //     &:nth-of-type(1){
+    //         background-color: $red;  
+    //     }
+    }
+}
+//////////////////////////////////////////////* */
+//  input
+//////////////////////////////////////////////* */
+input,
+textarea{
+    border-bottom: $white 1px solid;
+    border: 0;
+    font-weight: 300;
+    transition: width 1s, border 3s, background-color 0.5s;
+    transition-timing-function: ease-in-out;
+    background-color: unset;
+    padding: 6px;
+    background-color: $grey1;
+
+    &:focus{
+        background-color: $grey2;
+    }
+    &:hover{
+        background-color: $grey2;
+    }
+}
+textarea{
+    min-height: $Vcell * 2.5;
+    @extend %input;
+    resize: none;
+}
+label{
+    @extend %label;
+}
+.hit{
+    color:$black;
+    font-weight: 300;
+    font-size: 1.3em;
+
+    &:focus{
+        color: $black;
+    }
+    &:hover{
+        color: $red;
+    }
+    &:checked{
+        color: $red;
+    } 
+}
+
+input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 16px;
+    z-index: 200;
+    cursor: pointer;
+    
+    & + label {
+      position: relative;
+      cursor: pointer;
+      padding: 0;
+      margin-bottom: 7px;
+    }
+  
+    // Box.
+    & + label:before {
+      content: '';
+      margin-right: 5px;
+      display: inline-block;
+      vertical-align: middle;
+      width: 16px;
+      height: 16px;
+      transition: 0.2s;
+      border: solid 1px $grey3;
+      border-radius: 2px;
+     
+
+    }
+    // Box hover
+    &:hover + label:before {
+        background-color: $grey2;
+
+    }
+    // Box focus
+    &:focus + label:before {
+        background-color: $grey2;
+    }
+    // Box checked
+    &:checked + label:before {
+        background-color: $main;
+        border: solid 1px $main;
+        content: "\e9c0";
+        font-family: "admira";
+        color: white;
+        font-size: 15px;
+    }
+    // Disabled state label.
+    &:disabled + label {
+      color: #b8b8b8;
+      cursor: auto;
+    }
+    // Disabled box.
+    &:disabled + label:before {
+      box-shadow: none;
+      background: #ddd;
+    }
+    &:checked + label:after {
+      content: '';
+      position: absolute;
+      left: 5px;
+      top: 9px;
+      width: 20px;
+      height: 20px;
+    }
+}
+
+input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 16px;
+    
+    & + label {
+      position: relative;
+      cursor: pointer;
+      padding: 0;
+    }
+  
+    // Box.
+    & + label:before {
+      content: '';
+      margin-right: 5px;
+      display: inline-block;
+      vertical-align: middle;
+      width: 16px;
+      height: 16px;
+      transition: 0.2s;
+      border: solid 1px $grey3;
+      border-radius: 50%;
+     
+
+    }
+    // Box hover
+    &:hover + label:before {
+        background-color: $grey2;
+
+    }
+    // Box focus
+    &:focus + label:before {
+        background-color: $grey2;
+    }
+    // Box checked
+    &:checked + label:before {
+        background-color: $black;
+        border: solid 1px $black;
+    }
+    // Disabled state label.
+    &:disabled + label {
+      color: #b8b8b8;
+      cursor: auto;
+    }
+    // Disabled box.
+    &:disabled + label:before {
+      box-shadow: none;
+      background: #ddd;
+    }
+    &:checked + label:after {
+      content: '';
+      position: absolute;
+      left: 5px;
+      top: 9px;
+      width: 20px;
+      height: 20px;
+    }
+}
+.modal_content form input[type="text"],
+textarea{
+    width: 100%;
+}
+.slider-wrapper{
+    margin-top: $Vcell;
+    cursor: pointer;
+    .slider{
+        margin-bottom: $Vcell/2;
+    }
+    .slider + .slider{
+        margin-top: $Vcell/1.5;
+    }
+    .noUi-horizontal{
+        height: 12px !important;
+    }
+    .noUi-vertical{
+        height: $Vcell*8;
+        width:  12px; 
+        margin: 28px 0;
+    }
+    .noUi-connect{
+        background-color: $main;
+    }
+    .noUi-horizontal .noUi-handle {
+        width: 20px;
+        height: 28px;
+        left: -17px;
+        top: -10px;
+        &:after{
+            display: none;
+        }
+        &:before{
+            display: none;  
+        }
+    }
+    label{
+        margin-bottom: $Vcell/2;
+    }
+
+}
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+//////////////////////////////////////////////* */
+//  forms
+//////////////////////////////////////////////* */
+form{
+    @extend %minpaddingcell;
+
+    label{
+        @extend %label;  
+    }
+    input,
+    textarea{
+        @extend %input;  
+        height: $Vcell;
+        border-radius: $radius;
+        margin: $Vcell / 8 0 $Vcell / 2 0 ;
+    }
+    .selectric{
+        margin: $Vcell / 8 0 $Vcell / 4 0 ;
+        .button{
+            top: 4px;
+
+        }
+    }
+    .tagify{
+        position: relative;
+        top: $Vcell / 4; 
+    }
+ }
+#searchbar input{
+    height: $Vcell * 2;
+}
+
+#searchbar{
+    padding-left :$Vcell / 2 ;
+    background-color: $white;
+    transition: background-color 0.3s;
+    transition-timing-function: ease-in-out;
+    position: relative;
+    z-index: 30;
+}
+.ui-autocomplete{
+    box-shadow: $shadow;
+    z-index: 900;
+    margin-top:$Vcell/2;
+    width: $Hcell * 11 !important;
+    background-color: $white;
+    border-radius: $radius;
+    opacity: 0.98;
+
+    li{
+        height: $Vcell*1.5;
+        transition: all $main-transition;
+        padding: $Vcell/2;
+        padding-left: $Vcell/4;
+
+        &:hover{
+            background-color: $grey2;
+            cursor: pointer;
+        }
+        &:before{
+            content: "";
+            display: flex;
+            width: $Vcell;
+            height:  $Vcell;
+            background-color: $secondary;
+            border-radius: $radius;
+            margin-right: 10px;
+        }
+    }
+ 
+}
+.ui-helper-hidden-accessible{
+    display: none;
+}
+//////////////////////////////////////////////* */
+//  tooltip
+//////////////////////////////////////////////* */
+.tooltip {
+    position: relative;
+    display: inline;
+
+    .tooltiptext {
+        @extend %tooltip;
+        width: $Hcell;
+        background-color: $black;
+        text-align: left;
+        border-radius: 2px;
+        padding: 5px 5px;
+        position: absolute;
+        z-index: 1;
+        left: 103%;
+
+        opacity: 0;
+        transition: opacity 0.5s;
+        transition-delay: 0.5s;    
+    }
+    .tooltiptext::after {
+        content: " ";
+        position: absolute;
+        top: 50%;
+        right: 100%; /* To the left of the tooltip */
+        margin-top: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: transparent $black transparent transparent;
+    }
+
+}
+.tooltip:hover .tooltiptext {
+    opacity: 0.9;
+}
+.tippy-tooltip.graphite-theme {
+    font-weight: 300;
+    opacity: 1;
+    background-color: rgba(46, 46, 46, 0.945);
+}
+.tippy-tooltip.crystal-theme {
+    font-weight: 300;
+    opacity: 1;
+    background-color:transparent !important;
+    background: transparent;
+}
+
+.tippy-tooltip.honeybee-theme .tippy-content {
+    /* Your styling here. Example: */
+    color: $white !important;
+}
+
+.options{
+    li{
+        &:hover{
+            background-color: $grey2;
+        }
+    }
+}
+//////////////////////////////////////////////* */
+//  float elements
+//////////////////////////////////////////////* */
+#float{
+    position: fixed;
+    right: $Vcell;
+    bottom: $Vcell;
+    @extend %centercenter_cell;
+    .float-button{
+        position: relative;
+        width: $Vcell * 1.6;
+        height: $Vcell * 1.6;
+        background: $main;
+        border-radius: 50%;
+        @extend %centercenter_cell;
+        transition: 0.3s;
+        opacity: 0.9;
+        z-index: 900;
+        cursor: pointer;
+        &:hover{
+            box-shadow: $shadow;
+            transform: scale(1.1);
+            @extend %elastic_animation;
+            background: $secondary;
+        }
+        
+        span{
+            &:after{
+                font-family: admira;
+                content: "\0051";
+                font-size: 2em;
+                color: $white;
+            }
+        }
+    }
+    .shadow{
+        position: absolute;
+        width: $Hcell*2;
+        height: $Hcell*2;
+        border-radius: 50%;
+        filter: blur(50px);
+        background: $white;
+        opacity: 0.6;
+
+    }
+}
+
+#spinner{
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    z-index: 950;
+    display: none;
+
+    span{
+        width: 40px;
+        height: 40px;
+        background-color: $secondary;
+        position: absolute;
+        z-index: 100;
+        border-radius: 100%;  
+        -webkit-animation: sk-scaleout 1.0s infinite ease-in-out;
+        animation: sk-scaleout 1.0s infinite ease-in-out;
+    }
+    div{
+        // background-color: $white;
+        // opacity: 0.6;
+        background-color:rgba(236, 236, 236, 0.3);
+        width: 100%;
+        height: 100%;
+        // filter: brightness(1);
+        // transition: all 400ms cubic-bezier(0.24, 0.04, 0.83, 0.48);
+    }
+}
+#overlay{
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    z-index: 950;
+    display: none;
+    &.visible{
+        display: block;
+    }
+    div{
+        // background-color: $white;
+        // opacity: 0.6;
+        background-color: rgba(236, 236, 236, 0.3);
+        width: 100%;
+        height: 100%;
+        // filter: brightness(1);
+        // transition: all 400ms cubic-bezier(0.24, 0.04, 0.83, 0.48);
+    }
+}
+.gradient{
+    width: $Hcell*2.5;
+    height: 20px;
+    position: absolute;
+    top: $Vcell*4.5;
+    z-index: 100;
+    background: -moz-linear-gradient(top, rgba(252,252,252,1) 0%, rgba(253,253,253,1) 39%, rgba(255,255,255,0) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(252,252,252,1) 0%,rgba(253,253,253,1) 39%,rgba(255,255,255,0) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(252,252,252,1) 0%,rgba(253,253,253,1) 39%,rgba(255,255,255,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
+}
+.notify{
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    height: $Vcell*2.5;
+    background-color: $white;
+    opacity: 0.9;
+    margin-top: $Vcell*2;
+}
+.animate_opacity{
+    animation:opac 0.8s
+}   
+.accordion-content {
+    display: none;
+}
+.accordion-toggle{
+    height: $Vcell * 2;
+    cursor: pointer;
+}
+.tag > *{
+    background-color: $black;
+    color: $white;
+    border-radius: 30px;
+    display: inline-flex;
+    padding: 0px 5px;
+    cursor: pointer;
+    font-size: 0.7em;
+    font-weight: 200;
+    margin: $Vcell / 7;
+    transition: background-color 0.2s;
+}
+.tag > *:hover{
+    background-color: $main;
+}
+.tag {    
+    li{
+        height: $Vcell/4;
+        padding: $Vcell/4 !important;
+
+    }
+}
+//////////////////////////////////////////////* */
+//  JSclass
+//////////////////////////////////////////////* */
+.hideInfo{
+    transform: translateX($Hcell*2.5);
+    transition: all 200ms cubic-bezier(0.24, 0.04, 0.83, 0.48);
+}
+.showInfo{
+    transform: translateX(0vw);
+    transition: all 200ms cubic-bezier(0.24, 0.04, 0.83, 0.48);
+}
+.opacity0{
+    opacity: 0;
+    transition: all 200ms cubic-bezier(0.24, 0.04, 0.83, 0.48);
+}
+.opacity1{
+    opacity: 1;
+    transition: all 200ms cubic-bezier(0.24, 0.04, 0.83, 0.48);
+}
+.blur1{
+    filter: brightness(0.85);
+    transition: all 400ms cubic-bezier(0.24, 0.04, 0.83, 0.48);
+}
+.blur0{
+    filter: unset;
+}
+.minMain{
+    width: $Hcell * 9 ;
+    transition: all 200ms cubic-bezier(0.24, 0.04, 0.83, 0.48);
+}
+.maxMain{
+    width: $Hcell * 11.5;
+    transition: all 200ms cubic-bezier(0.24, 0.04, 0.83, 0.48);
+}
+.active1{
+    background-color: red !important;
+}
+.count{
+    background-color: red;
+}
+//////////////////////////////////////////////* */
+//  animation
+//////////////////////////////////////////////* */
+@-webkit-keyframes sk-scaleout {
+    0% { -webkit-transform: scale(0) }
+    100% {
+      -webkit-transform: scale(1.0);
+      opacity: 0;
+    }
+  }
+  
+@keyframes sk-scaleout {
+    0% { 
+      -webkit-transform: scale(0);
+      transform: scale(0);
+    } 100% {
+      -webkit-transform: scale(1.0);
+      transform: scale(1.0);
+      opacity: 0;
+    }
+  }
+

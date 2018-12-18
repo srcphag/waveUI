@@ -1,0 +1,154 @@
+$grey1: hsl(0, 0%, 98%);
+$grey2: hsl(0, 0%, 94%);
+$grey3: hsl(0, 0%, 83%);
+
+$black: #535353;
+$white: #ffffff;
+$whitetrans: rgba(255, 255, 255, 0.082);
+$whitetrans2: rgba(255, 255, 255, 0.425);
+$blacktrans: rgba(61, 61, 61, 0.041);
+$disabled: rgba(58, 58, 58, 0.22);
+
+$orange: #FBB040;
+$red: #9A405B;
+$green: #689840;
+
+$shadow: 0px 2px 5px rgba(0,0,0,0.1);
+$inner-shadow: inset 0px 10px 10px rgba(0,0,0,0.1);
+$line: 1px solid $grey2;
+
+// $main: hsl(0, 0%, 15%);
+$main: #545a6d; 
+$secondary:#405c98; 
+// $secondary:#FFC054;
+$secondarytrans:rgba(255, 192, 84, 0.055);
+
+$Vcell: 3.125vh !default;
+$Hcell: 6.25vw !default;
+$schedulecell:  3.125vh * 1.5;
+// Grid:
+//     { Vcell= 32 Divisiones de espacio vertical
+//     { Hcell= 16 Divisiones de espacio horizontal
+
+$radius: 5px;
+$main-transition: 0.3s;
+$drop-transition: 0.1s;
+
+//////////////////////////////////////////////* */
+
+@keyframes opac{
+    from{opacity:0} to{opacity:1}
+}
+%fade_in{
+    animation: fadein 1.5s;
+    animation-play-state: running; 
+    @keyframes fadein{
+        from {opacity:0;}
+        to {opacity:1;}
+    }
+}
+%modal{
+    animation: fadein 0.8s;
+    animation-timing-function: cubic-bezier(0.000, 1.165, 0.590, 1.375); 
+    @keyframes fadein{
+        from {opacity:0; }
+        to {opacity:1;}
+    }
+}
+%center_cell{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+%centercenter_cell{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+%paddingcell{
+    padding: 0 $Hcell / 4;
+}
+%minpaddingcell{
+    padding: 0 $Hcell / 8;
+}
+%list{
+    font-size: 0.9em;
+    font-weight: 300;
+}
+%itemlist{
+    font-size: 1.2em;
+    font-weight: 300;
+}
+%mainheader{
+    font-size: 1.8em;
+    font-weight: 200; 
+}
+%header{
+    font-size: 1.4em;
+    font-weight: 300;
+}
+%subheader{
+    font-size: 1.2em;
+    font-weight: 300;
+    margin-bottom: $Vcell / 2;
+}
+%sectionheader{
+    font-size: 1em;
+    font-weight: 300;
+}
+%p{
+    font-size: 0.9em;
+    font-weight: 300;
+    margin-bottom: $Vcell;
+}
+%input{
+    font-size: 0.8em;
+    font-weight: 300;
+}
+%tag{
+    font-size: 0.9em;
+    font-weight: 200;
+}
+%label{
+    font-size: 0.9em;
+    font-weight: 300;
+    width: 100%;
+    display: block;
+}
+%tooltip{
+    font-size: 0.9em;
+    font-weight: 300;
+    color: $white;
+}
+%shadow{
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+}
+%inner_shadow{
+    box-shadow: inset 0px 4px 10px rgba(0,0,0,0.1);
+}
+%upper_innershadow{
+    box-shadow: inset 0px 6px 10px rgba(0,0,0,0.1);
+}
+%elastic_animation{
+    -webkit-transition: all 400ms cubic-bezier(0.000, 1, 0.590, 1); /* older webkit */
+    -webkit-transition: all 400ms cubic-bezier(0.000, 1.165, 0.590, 1.375); 
+       -moz-transition: all 400ms cubic-bezier(0.000, 1.165, 0.590, 1.375); 
+         -o-transition: all 400ms cubic-bezier(0.000, 1.165, 0.590, 1.375); 
+            transition: all 400ms cubic-bezier(0.000, 1.165, 0.590, 1.375); /* custom */
+    
+    -webkit-transition-timing-function: cubic-bezier(0.000, 1, 0.590, 1); /* older webkit */
+    -webkit-transition-timing-function: cubic-bezier(0.000, 1.165, 0.590, 1.375); 
+       -moz-transition-timing-function: cubic-bezier(0.000, 1.165, 0.590, 1.375); 
+         -o-transition-timing-function: cubic-bezier(0.000, 1.165, 0.590, 1.375); 
+            transition-timing-function: cubic-bezier(0.000, 1.165, 0.590, 1.375); /* custom */
+}
+%active_play{
+    animation: active_play 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: cubic-bezier(0.000, 1.165, 0.590, 1.375);
+    @keyframes active_play{
+        0%   {opacity:0.3; transform: scale(1); filter: blur(0px);}
+        100% {opacity:0; transform: scale(1.2);filter: blur(0px);}
+    }
+}
+
